@@ -41,14 +41,14 @@ export function Post() {
           
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
           
-          <div className="absolute bottom-0 left-0 w-full p-6 sm:p-12 md:p-24">
+          <div className="absolute bottom-0 left-0 w-full p-4 sm:p-8 md:p-16 lg:p-24">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto max-w-4xl"
             >
-              <div className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-paper/80">
+              <div className="mb-3 sm:mb-6 flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-paper/80">
                 <span>{article.date}</span>
                 <span className="h-1 w-1 rounded-full bg-paper/40"></span>
                 <span>{article.tags[0]}</span>
@@ -56,7 +56,7 @@ export function Post() {
                 <span>{article.readTime}</span>
               </div>
               
-              <h1 className="font-serif text-4xl font-medium leading-tight tracking-tight text-paper sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight tracking-tight text-paper">
                 {article.title}
               </h1>
             </motion.div>
@@ -75,57 +75,64 @@ export function Post() {
               {article.excerpt}
             </p>
             
-            <p>
-              The modern world demands our constant attention. We are bombarded with notifications, emails, and the endless scroll of social media. In this cacophony, silence has become a luxury, a rare commodity that we must actively seek out and cultivate.
-            </p>
-            
-            <p>
-              But what does it mean to truly embrace silence? It is not merely the absence of noise, but a state of being—a profound stillness that allows us to connect with our inner selves and the world around us in a more meaningful way.
-            </p>
-
-            <QuoteEmbed 
-              quote="In the attitude of silence the soul finds the path in a clearer light, and what is elusive and deceptive resolves itself into crystal clearness."
-              author="Mahatma Gandhi"
-            />
-
-            <h2 className="text-3xl mt-16 mb-8 text-ink">The Architecture of Quiet Spaces</h2>
-            
-            <p>
-              Throughout history, humans have designed spaces specifically to foster contemplation and peace. From the soaring arches of Gothic cathedries to the minimalist serenity of Japanese Zen gardens, these environments share a common purpose: to quiet the mind and elevate the spirit.
-            </p>
-
-            <ImageEmbed 
-              src="https://picsum.photos/seed/architecture/1200/800"
-              alt="Minimalist architecture"
-              caption="The interplay of light and shadow creates a natural rhythm that encourages reflection."
-              size="wide"
-            />
-
-            <p>
-              When we enter these spaces, we instinctively lower our voices. Our breathing slows. We become acutely aware of the subtle details—the texture of stone, the play of light on water, the gentle rustle of leaves. This heightened awareness is the gift of silence.
-            </p>
-
-            <h2 className="text-3xl mt-16 mb-8 text-ink">Cultivating Your Own Sanctuary</h2>
-
-            <p>
-              You don't need to travel to a remote monastery to experience the benefits of silence. You can create your own sanctuary, right where you are. It begins with a simple intention: to carve out a few moments of quiet each day.
-            </p>
-
-            <Gallery 
-              images={[
-                { src: "https://picsum.photos/seed/gallery1/800/1000", alt: "Morning light" },
-                { src: "https://picsum.photos/seed/gallery2/800/800", alt: "Coffee cup" },
-                { src: "https://picsum.photos/seed/gallery3/800/800", alt: "Open book" }
-              ]}
-            />
-
-            <p>
-              Start small. Turn off your phone for an hour. Sit by a window and watch the clouds drift by. Take a walk without headphones. Notice the sounds that emerge when the artificial noise fades away—the hum of the refrigerator, the distant chirp of a bird, the rhythm of your own breath.
-            </p>
-
-            <p>
-              As you practice this intentional silence, you may find that it becomes less daunting and more inviting. It becomes a refuge, a place where you can return to yourself, again and again.
-            </p>
+            {article.contentBlocks && article.contentBlocks.length > 0 ? (
+              article.contentBlocks.map((block, idx) => {
+                switch (block.type) {
+                  case "paragraph":
+                    return <p key={idx}>{block.text}</p>;
+                  case "heading":
+                    return block.level === 3 ? (
+                      <h3 key={idx} className="text-2xl mt-12 mb-6 text-ink">
+                        {block.text}
+                      </h3>
+                    ) : (
+                      <h2 key={idx} className="text-3xl mt-16 mb-8 text-ink">
+                        {block.text}
+                      </h2>
+                    );
+                  case "quote":
+                    return (
+                      <QuoteEmbed 
+                        key={idx}
+                        quote={block.quote}
+                        author={block.author}
+                      />
+                    );
+                  case "image":
+                    return (
+                      <ImageEmbed 
+                        key={idx}
+                        src={block.src}
+                        alt={block.alt}
+                        caption={block.caption}
+                        size="wide"
+                      />
+                    );
+                  case "gallery":
+                    return (
+                      <Gallery 
+                        key={idx}
+                        images={block.images}
+                      />
+                    );
+                  case "callout":
+                    return (
+                      <div key={idx} className="my-8 border-l-2 border-accent bg-ink/5 p-6 rounded-r">
+                        {block.title && (
+                          <h4 className="font-serif text-lg font-semibold text-ink mb-2">
+                            {block.title}
+                          </h4>
+                        )}
+                        <p className="text-ink-light m-0">{block.text}</p>
+                      </div>
+                    );
+                  default:
+                    return null;
+                }
+              })
+            ) : (
+              <p>No content has been added to this entry yet.</p>
+            )}
           </motion.div>
           
           <AuthorInfo author={article.author} />

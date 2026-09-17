@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { defaultAuthor } from "../data/articles";
+import { primaryAuthor } from "../data/authors";
+import { siteConfig } from "../data/siteConfig";
 import { FadeImage } from "../components/FadeImage";
 
 export function About() {
@@ -19,8 +20,8 @@ export function About() {
             <div className="w-full md:w-1/2">
               <div className="aspect-[4/5] overflow-hidden rounded-sm bg-ink/5 sticky top-24">
                 <FadeImage 
-                  src={defaultAuthor.avatar.replace('200/200', '800/1000')} 
-                  alt={defaultAuthor.name} 
+                  src={primaryAuthor.avatar} 
+                  alt={primaryAuthor.name} 
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
@@ -29,29 +30,39 @@ export function About() {
             
             <div className="w-full md:w-1/2 flex flex-col justify-center pt-8 md:pt-0">
               <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium text-ink mb-8 tracking-tight">
-                About Jane
+                {siteConfig.about.headline}
               </h1>
               <div className="prose prose-stone prose-lg prose-p:leading-relaxed prose-p:text-ink-light">
                 <p className="text-2xl font-serif italic text-ink mb-8 leading-snug">
-                  {defaultAuthor.bio}
+                  {siteConfig.about.introQuote}
                 </p>
-                <p>
-                  I started this space as a way to document the quiet moments that often go unnoticed. In a world that constantly demands our attention and pushes us to move faster, I found myself craving stillness.
-                </p>
-                <p>
-                  Through my photography and essays, I explore the intersection of travel, mindfulness, and the art of paying attention. Whether I'm wandering through the bustling streets of Tokyo or sitting in a quiet cafe in Paris, my goal is always to capture the essence of a place and the feeling of being fully present in it.
-                </p>
-                <p>
-                  Thank you for being here. I hope these stories inspire you to slow down, look closer, and find your own moments of quiet amidst the noise.
-                </p>
+                {siteConfig.about.storyParagraphs.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
               </div>
               
               <div className="mt-16 pt-12 border-t border-ink/10">
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-ink mb-6">Connect & Inquiries</h3>
                 <div className="flex flex-col gap-4">
-                  <a href="#" className="text-ink-light hover:text-accent transition-colors font-medium">hello@janedoe.com</a>
-                  <a href="#" className="text-ink-light hover:text-accent transition-colors font-medium">Twitter: {defaultAuthor.twitter}</a>
-                  <a href="#" className="text-ink-light hover:text-accent transition-colors font-medium">Instagram: {defaultAuthor.instagram}</a>
+                  {siteConfig.about.contactEmail && (
+                    <a 
+                      href={`mailto:${siteConfig.about.contactEmail}`} 
+                      className="text-ink-light hover:text-accent transition-colors font-medium"
+                    >
+                      {siteConfig.about.contactEmail}
+                    </a>
+                  )}
+                  {siteConfig.socialLinks.map((social, idx) => (
+                    <a 
+                      key={idx} 
+                      href={social.url} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="text-ink-light hover:text-accent transition-colors font-medium"
+                    >
+                      {social.platform}: {social.handle || social.url}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

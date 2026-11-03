@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "motion/react";
 import type { Article } from "../data/articles";
 import { cn } from "../lib/utils";
 import { FadeImage } from "./FadeImage";
@@ -7,75 +6,146 @@ import { FadeImage } from "./FadeImage";
 interface ArticleCardProps {
   article: Article;
   featured?: boolean;
-  index: number;
+  index?: number;
 }
 
-export function ArticleCard({ article, featured = false, index }: ArticleCardProps) {
+export function ArticleCard({ article, featured = false }: ArticleCardProps) {
+  if (featured) {
+    return (
+      <article className="group grid grid-cols-1 lg:grid-cols-12 lg:gap-10 items-start">
+        <div className="lg:col-span-7">
+          <Link
+            to={`/post/${article.slug}`}
+            className="block overflow-hidden rounded-none border border-ink/10 bg-paper-muted aspect-[16/10]"
+          >
+            <FadeImage
+              src={article.coverImage}
+              alt={article.title}
+              referrerPolicy="no-referrer"
+              className="h-full w-full object-cover transition-opacity duration-200 group-hover:opacity-90"
+            />
+          </Link>
+        </div>
+
+        <div className="lg:col-span-5 flex flex-col justify-between pt-6 lg:pt-1 lg:border-l lg:border-ink/10 lg:pl-10 h-full">
+          <div>
+            <div className="mb-4 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-ink-muted tabular-nums">
+              <span className="text-accent font-semibold">
+                {article.tags[0]}
+              </span>
+              <span>&middot;</span>
+              <span>{article.date}</span>
+              <span>&middot;</span>
+              <span>{article.readTime}</span>
+              {article.issueSlug && article.issueLabel && (
+                <>
+                  <span>&middot;</span>
+                  <Link
+                    to={`/issues/${article.issueSlug}`}
+                    className="text-ink hover:text-accent transition-colors duration-150"
+                  >
+                    {article.issueLabel}
+                  </Link>
+                </>
+              )}
+            </div>
+
+            <Link
+              to={`/post/${article.slug}`}
+              className="block group-hover:text-accent transition-colors duration-150"
+            >
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.14] tracking-tight text-ink mb-5">
+                {article.title}
+              </h2>
+            </Link>
+
+            <p className="text-base sm:text-lg text-ink-light leading-relaxed mb-8">
+              {article.excerpt}
+            </p>
+          </div>
+
+          <div className="pt-5 border-t border-ink/10 flex items-center justify-between text-xs">
+            <div>
+              <Link
+                to={`/contributors/${article.author.slug}`}
+                className="font-medium text-ink hover:text-accent transition-colors duration-150"
+              >
+                {article.author.name}
+              </Link>
+              {article.author.role && (
+                <span className="text-ink-muted block mt-0.5">
+                  {article.author.role}
+                </span>
+              )}
+            </div>
+            <Link
+              to={`/post/${article.slug}`}
+              className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent hover:text-ink transition-colors duration-150"
+            >
+              Read Piece &rarr;
+            </Link>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   return (
-    <motion.article 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        "group flex flex-col gap-6",
-        featured ? "md:flex-row md:items-center md:gap-12" : ""
-      )}
-    >
-      <Link 
-        to={`/post/${article.slug}`} 
-        className={cn(
-          "block overflow-hidden rounded-sm bg-ink/5",
-          featured ? "aspect-[16/9] md:aspect-[4/3] md:w-3/5" : "aspect-[4/3] w-full"
-        )}
+    <article className={cn("group flex flex-col h-full")}>
+      <Link
+        to={`/post/${article.slug}`}
+        className="block overflow-hidden rounded-none border border-ink/10 bg-paper-muted aspect-[16/10] mb-5"
       >
-        <FadeImage 
-          src={article.coverImage} 
-          alt={article.title} 
+        <FadeImage
+          src={article.coverImage}
+          alt={article.title}
           referrerPolicy="no-referrer"
-          className="h-full w-full object-cover group-hover:scale-105"
+          className="h-full w-full object-cover transition-opacity duration-200 group-hover:opacity-90"
           loading="lazy"
         />
       </Link>
-      
-      <div className={cn(
-        "flex flex-col",
-        featured ? "md:w-2/5" : ""
-      )}>
-        <div className="mb-3 flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-ink-light">
+
+      <div className="flex flex-col flex-1">
+        <div className="mb-2.5 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-ink-muted tabular-nums">
+          <span className="text-accent font-semibold">{article.tags[0]}</span>
+          <span>&middot;</span>
           <span>{article.date}</span>
-          <span className="h-1 w-1 rounded-full bg-ink/20"></span>
-          <span>{article.tags[0]}</span>
+          {article.issueSlug && article.issueLabel && (
+            <>
+              <span>&middot;</span>
+              <Link
+                to={`/issues/${article.issueSlug}`}
+                className="text-ink-light hover:text-accent transition-colors duration-150"
+              >
+                {article.issueLabel}
+              </Link>
+            </>
+          )}
         </div>
-        
-        <Link to={`/post/${article.slug}`} className="group-hover:text-accent transition-colors">
-          <h2 className={cn(
-            "font-serif leading-tight text-ink",
-            featured ? "text-3xl md:text-5xl mb-4" : "text-2xl mb-3"
-          )}>
+
+        <Link
+          to={`/post/${article.slug}`}
+          className="group-hover:text-accent transition-colors duration-150"
+        >
+          <h3 className="font-serif text-2xl sm:text-[1.65rem] leading-[1.2] text-ink mb-3">
             {article.title}
-          </h2>
+          </h3>
         </Link>
-        
-        <p className={cn(
-          "text-ink-light leading-relaxed",
-          featured ? "text-lg mb-6" : "text-sm mb-4 line-clamp-3"
-        )}>
+
+        <p className="text-sm sm:text-[15px] text-ink-light leading-relaxed mb-6 line-clamp-3">
           {article.excerpt}
         </p>
-        
-        <div className="mt-auto flex items-center gap-3">
-          <FadeImage 
-            src={article.author.avatar} 
-            alt={article.author.name}
-            referrerPolicy="no-referrer"
-            className="h-8 w-8 rounded-full object-cover grayscale"
-          />
-          <div className="flex flex-col">
-            <span className="text-xs font-medium">{article.author.name}</span>
-            <span className="text-xs text-ink-light">{article.readTime}</span>
-          </div>
+
+        <div className="mt-auto pt-4 border-t border-ink/8 flex items-center justify-between text-xs text-ink-muted tabular-nums">
+          <Link
+            to={`/contributors/${article.author.slug}`}
+            className="font-medium text-ink hover:text-accent transition-colors duration-150"
+          >
+            {article.author.name}
+          </Link>
+          <span>{article.readTime}</span>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

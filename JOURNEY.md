@@ -133,5 +133,79 @@ This log documents the sequential transformation of the personal blog from a har
 - **Documentation**:
   - Formally updated and codified in `/DESIGN.md`.
 
+---
 
+## Stage 10: 9-Pass Surface Unslop Overhaul (`heydamir/unslop` Methodology)
 
+Executed all nine passes in dependency order (*Spacing → Color → Icons → Copy → Type → Layout → Details → Visuals → Motion*) to replace generic template tells with an authentic archival literary broadsheet:
+
+1. **Pass 1 (Spacing)**: Standardized vertical section cadence and eliminated nested card padding in favor of exposed `1px` architectural hairlines (`border-ink/12`).
+2. **Pass 2 (Color)**: Replaced the warm-cream (`#FBF9F5`) + terracotta (`#C85A32`) palette with **Crisp Archival Paper** (`#F7F5F0`), **Deep Archival Carbon Ink** (`#141312`), and **Deep Oxblood** (`#7A1C1C`) governed by a strict 60-30-10 budget.
+3. **Pass 3 (Icons)**: Purged decorative icons (`Feather` in header, `Calendar`/`Mail`/`CheckCircle2` in submissions, boxed icon badges in contact); retained icons exclusively for functional controls.
+4. **Pass 4 (Copy)**: Removed shouty uppercase micro-kickers (`"Official Publication"`, `"Open Call for Volume 2026-27"`) and unified the hero statement (*"Words, ink, and campus echoes from Kolkata."*) without mid-sentence colored italic spans. Decoupled all Submissions and Contact copy into `/src/data/siteConfig.ts`.
+5. **Pass 5 (Type)**: Added `text-wrap: balance` to all headings, enforced `tabular-nums` across dates, reading times, and index counters (`01`–`06`), and added a 3-line literary `.editorial-dropcap` to opening article paragraphs.
+6. **Pass 6 (Layout)**:
+   - Consolidated the two-row header and duplicate home filter bar into a **Single-Row 3-Zone Top Bar** (`Header.tsx`).
+   - Structured `Home.tsx` into a **3-Tier Editorial Front Page** (Tier 1 Asymmetric 12-Col Lead Split, Tier 2 2-Col Feature Grid, Tier 3 Horizontal Archive Ledger Rows).
+   - Replaced the 70vh dark-scrim scroll-parallax cover hero in `Post.tsx` with a **Daylight Editorial Broadsheet Header** and framed cover plate (`Fig. 1`) above a `65ch` prose column.
+   - Refactored `Submissions.tsx`, `About.tsx`, `Artwork.tsx`, and `Contact.tsx` into hairline-divided editorial ledgers and museum plate catalogs.
+7. **Pass 7 (Details)**: Enforced Zero-Pill and Zero-Left-Stripe discipline—removed all `rounded-full` badges and `border-l-2` stripes in favor of top-and-bottom hairline rules (`border-y`) and middot (`·`) separators.
+8. **Pass 8 (Visuals)**: Framed all photography, portraits, and artwork in rectilinear plates (`rounded-none border border-ink/10`) with visible numbered plate captions and no hover scale-zoom gimmicks.
+9. **Pass 9 (Motion)**: Removed scroll-linked parallax transforms and slow `800ms` slide-up delays; constrained all interactive transitions to `150ms–200ms`.
+
+---
+
+## Stage 11: Pillar 2 — Content & Institutional Architecture
+
+Transformed the platform from a flat chronological stream into a collegiate literary periodical and living campus society archive:
+
+1. **Seasonal Issues & Archival Folios (`/src/data/issues.ts`, `/src/pages/Issues.tsx`)**:
+   - Introduced structured volumes (`Vol. XIV, Issue I: Memory, Rain & the Subaltern City`, `Vol. XIII, Issue II: Margin, Machine & the Vernacular Press`, and `Vol. XIII, Issue I: Translating the Everyday`).
+   - Built `/issues` and `/issues/:slug` featuring a volume switcher bar, framed cover plate, full Editor's Note with drop-cap and sign-off, numbered Table of Contents, issue-specific visual plates, and an Archival Volumes vault.
+   - Added a **Current Issue Folio Spotlight** on `Home.tsx`.
+2. **Contributor Directory & Student Dossiers (`/src/data/authors.ts`, `/src/pages/Contributors.tsx`, `/src/pages/ContributorDetail.tsx`)**:
+   - Expanded `/src/data/authors.ts` to index 8 Jadavpur University contributors across English, Comparative Literature, Philosophy, Film Studies, Printing Engineering, History, Architecture, and Bengali.
+   - Built the filterable `/contributors` directory and individual `/contributors/:slug` dossiers displaying portraits, epigraphs, departmental affiliations, published writings, and exhibited visual plates.
+   - Linked author bylines across `Home.tsx`, `ArticleCard.tsx`, `Post.tsx`, `Artwork.tsx`, and `AuthorInfo.tsx` directly to their contributor dossiers.
+3. **Campus Literary Chronicle (`/src/data/chronicle.ts`, `/src/pages/Chronicle.tsx`)**:
+   - Built `/chronicle` to log upcoming JUALS readings at the Open Air Theatre (OAT), small-press colloquia at Vivekananda Hall, translation workshops, and archival event dispatches, plus added a preview strip on `Home.tsx`.
+4. **Student Editorial Board Masthead (`/src/data/masthead.ts`, `/src/pages/About.tsx`)**:
+   - Added a four-section hairline masthead ledger to `/about` crediting the Editors-in-Chief, Department & Genre Editors, Visual Plates & Production Directors, and Archival Fellows.
+5. **Authentic Visual Plate Attribution (`/src/data/photography.ts`, `/src/pages/Artwork.tsx`)**:
+   - Replaced all generic travel stock captions with 12 Jadavpur University & Kolkata darkroom photography, linocut, and architectural monotype plates attributed to student artists and linked to seasonal issues.
+
+---
+
+## Stage 12: Pillar 3 — Reader Experience, Literary Craft & Joy
+
+Elevated the article reading canvas (`Post.tsx`) to support literary craft, bilingual comparative literature, and scholarly apparatus:
+
+1. **True Poetry & Verse Stanza Formatting (`/src/components/PoetryBlock.tsx`, `/src/types.ts`, `/src/data/articles.ts`)**:
+   - Added a dedicated `poetry` content block supporting stanza groupings, epigraphs, compositional footnotes, stepped caesura indents (`indent: 0 | 1 | 2 | 3`), hanging indents (`pl-6 -indent-6`) to prevent awkward mobile line wraps, and automatic tabular line numbering (`1, 5, 10, 15...`) in the left gutter.
+2. **Interactive Bilingual & Vernacular Translation Folio (`/src/components/TranslationBlock.tsx`)**:
+   - Added a `translation` content block pairing original Bengali script (`বাংলা`), optional Romanized transliteration, and English literary translation.
+   - Provided an interactive view switcher (`Side-by-Side`, `Stacked`, `Original`, `English`) plus a phonetic transliteration toggle and translator glosses.
+3. **Scholarly Marginalia, Desktop Sidenotes & Mobile Inline Drawer (`/src/pages/Post.tsx`)**:
+   - Introduced an asymmetric 12-column reading canvas on desktop (`8` columns for the `65ch` reading column + `4` columns for the sticky **Scholarly Marginalia** right-margin rail) paired with inline collapsible annotation drawers on mobile/tablet and a consolidated **Notes & Archival Apparatus** ledger at the foot of the essay.
+4. **Academic Citation Box & Print-Ready Broadsheet (`/src/components/AcademicCitationBox.tsx`, `/src/index.css`)**:
+   - Added an interactive bibliographic record box with `MLA 9th`, `Chicago 17th`, and `BibTeX` format tabs, one-click clipboard copy, and a `Print Broadsheet` button backed by `@media print` offprint typography.
+5. **Top Reading Progress Hairline & Sequential Issue Pager (`/src/pages/Post.tsx`)**:
+   - Added a scroll-linked `2px` Deep Oxblood reading progress hairline at the top of the viewport and a bottom `Previous in Issue` / `Next in Issue` folio pager.
+
+---
+
+## Stage 13: Pillar 1 — Visual Surface, Editorial Polish & Archival Tactility
+
+Completed the museum-grade surface architecture, dual reading atmosphere, bespoke editorial plates, and archival inspection tools:
+
+1. **Dual Reading Atmosphere — Daylight Archival Paper & Evening Ink Mode (`/src/index.css`, `/src/context/ThemeContext.tsx`, `/src/App.tsx`)**:
+   - Added a persistent `ThemeContext` (`daylight` vs. `evening`) backed by CSS custom property overrides on `html[data-theme="evening"]` (`#121110` nocturnal press-room ground, `#1A1816` elevated charcoal folio, `#EAE6DF` warm parchment ink, `#D46A5E` luminous vermilion-oxblood) and a subtle cotton-rag paper micro-grain overlay (`body::before`).
+2. **Streamlined 5-Link Masthead & Top Issue Colophon Strip (`/src/components/Header.tsx`, `/src/components/MenuOverlay.tsx`, `/src/data/siteConfig.ts`)**:
+   - Added a top archival colophon strip displaying the campus dateline (`Jadavpur University · Kolkata · 22.4989° N`), direct link to the active seasonal folio, and the interactive `Daylight Paper` / `Evening Ink` switcher.
+   - Streamlined the primary desktop navigation bar to 5 core links (`Issues`, `Poetry`, `Prose`, `Artwork`, `Chronicle`) with keyboard-accessible Search (`/`) and an expanded **Periodical Directory** drawer (`MenuOverlay.tsx`).
+3. **Bespoke Jadavpur & Kolkata Editorial Cover Plates (`/public/images/editorial/*.svg`, `/src/data/issues.ts`, `/src/data/articles.ts`, `/src/data/photography.ts`)**:
+   - Created four bespoke vector lithograph, woodcut, and letterpress specimen plates (*Aurobindo Bhavan Colonnade in October Squall*, *Last Tram Past Tallygunge Depot*, *Foundry Type & Bengali Ligatures, Patuatola Lane*, and *Subarnarekha River Bend at Dawn*) and wired them across seasonal issues, lead articles, and the visual plates catalog.
+4. **Museum Lightbox & Archival Plate Dossier (`/src/components/PlateLightbox.tsx`, `/src/pages/Artwork.tsx`, `/src/components/Lightbox.tsx`)**:
+   - Built `PlateLightbox.tsx` with `1.0× Fit` / `1.75× Detail` zoom inspection, keyboard plate stepping (`←`, `→`, `Z`, `Esc`), and a toggleable **Archival Record** sidebar displaying accession numbers (`JUALS-PLT-2025-01`), medium, dimensions, camera/process specs, provenance, and curatorial notes.
+5. **Live-Filtering Archival Search Folio (`/src/components/SearchOverlay.tsx`)**:
+   - Upgraded `SearchOverlay.tsx` to perform real-time full-text filtering across articles (including bilingual poetry stanzas and marginalia annotations), contributors, seasonal issues, and campus chronicle events, complete with instant genre facets and curated quick-select archival terms.

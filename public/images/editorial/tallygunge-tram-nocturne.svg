@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#121110"/>
+      <stop offset="60%" stop-color="#1C1A18"/>
+      <stop offset="100%" stop-color="#141312"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8B86D" stop-opacity="0.85"/>
+      <stop offset="40%" stop-color="#C87A3E" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#121110" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Nocturnal Silver-Gelatin Dark Ground -->
+  <rect width="1200" height="900" fill="url(#night)"/>
+
+  <!-- Overhead Tramway Catenary Wires -->
+  <g stroke="#EAE6DF" stroke-opacity="0.28" stroke-width="1" fill="none">
+    <path d="M 0 140 Q 600 210 1200 120"/>
+    <path d="M 0 185 Q 580 245 1200 165"/>
+    <line x1="180" y1="60" x2="1020" y2="260"/>
+    <line x1="600" y1="175" x2="600" y2="335" stroke-width="2" stroke-opacity="0.5"/>
+  </g>
+
+  <!-- Sodium-Vapour Streetlamp Halos -->
+  <circle cx="340" cy="310" r="190" fill="url(#lamp)"/>
+  <circle cx="600" cy="290" r="240" fill="url(#lamp)"/>
+  <circle cx="880" cy="330" r="170" fill="url(#lamp)"/>
+
+  <!-- South Kolkata Colonial Shuttered Facades in Silhouette -->
+  <g fill="#181614" stroke="#3A3632" stroke-width="1">
+    <rect x="60" y="180" width="230" height="360"/>
+    <rect x="890" y="200" width="250" height="340"/>
+  </g>
+
+  <!-- Calcutta Tram Car Silhouette (Route 24/29 Tallygunge–Ballygunge) -->
+  <g transform="translate(455, 315)">
+    <rect x="0" y="20" width="290" height="175" rx="12" fill="#23201D" stroke="#9E9A93" stroke-width="1.5"/>
+    <!-- Illuminated Clerestory & Route Number Box -->
+    <rect x="95" y="4" width="100" height="22" fill="#7A1C1C" stroke="#EAE6DF" stroke-width="1"/>
+    <text x="145" y="19" font-family="Georgia, serif" font-size="12" fill="#F7F5F0" text-anchor="middle" letter-spacing="2">TALLYGUNGE</text>
+    <!-- Warm Glowing Tram Windows -->
+    <g fill="#E8B86D" fill-opacity="0.82" stroke="#141312" stroke-width="1.5">
+      <rect x="24" y="48" width="48" height="64"/>
+      <rect x="84" y="48" width="48" height="64"/>
+      <rect x="158" y="48" width="48" height="64"/>
+      <rect x="218" y="48" width="48" height="64"/>
+    </g>
+    <!-- Single Brass Headlamp -->
+    <circle cx="145" cy="148" r="14" fill="#FFF3D6"/>
+    <circle cx="145" cy="148" r="36" fill="url(#lamp)"/>
+  </g>
+
+  <!-- Glistening Steel Tram Rails Converging in Perspective -->
+  <g stroke="#EAE6DF" stroke-opacity="0.65" fill="none">
+    <line x1="525" y1="510" x2="180" y2="870" stroke-width="3.5"/>
+    <line x1="675" y1="510" x2="1020" y2="870" stroke-width="3.5"/>
+    <line x1="560" y1="510" x2="360" y2="870" stroke-width="1.8" stroke-opacity="0.4"/>
+    <line x1="640" y1="510" x2="840" y2="870" stroke-width="1.8" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Wet Asphalt Headlamp & Amber Window Reflections -->
+  <g opacity="0.4">
+    <polygon points="585,520 615,520 680,860 520,860" fill="#E8B86D"/>
+    <line x1="470" y1="580" x2="730" y2="580" stroke="#EAE6DF" stroke-width="1.5"/>
+    <line x1="420" y1="650" x2="780" y2="650" stroke="#EAE6DF" stroke-width="1.5"/>
+    <line x1="350" y1="740" x2="850" y2="740" stroke="#EAE6DF" stroke-width="1.5"/>
+  </g>
+
+  <!-- Outer Archival Silver-Gelatin Frame -->
+  <rect x="32" y="32" width="1136" height="836" fill="none" stroke="#EAE6DF" stroke-width="1" stroke-opacity="0.35"/>
+
+  <g font-family="Georgia, serif" font-size="13" fill="#EAE6DF" fill-opacity="0.7" letter-spacing="3">
+    <text x="64" y="838">PLATE II · LAST TRAM PAST TALLYGUNGE DEPOT · ILFORD HP5 NOCTURNE STUDY</text>
+  </g>
+</svg>

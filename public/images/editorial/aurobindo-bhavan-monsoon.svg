@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E7E2D8"/>
+      <stop offset="60%" stop-color="#D8D2C5"/>
+      <stop offset="100%" stop-color="#C8C0B0"/>
+    </linearGradient>
+    <linearGradient id="brick" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6B221E"/>
+      <stop offset="100%" stop-color="#481614"/>
+    </linearGradient>
+    <linearGradient id="puddle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2B2927" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#141312" stop-opacity="0.96"/>
+    </linearGradient>
+    <pattern id="rain" width="40" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+      <line x1="10" y1="0" x2="10" y2="52" stroke="#141312" stroke-width="0.75" stroke-opacity="0.22"/>
+      <line x1="28" y1="20" x2="28" y2="75" stroke="#141312" stroke-width="0.6" stroke-opacity="0.16"/>
+    </pattern>
+    <pattern id="louvers" width="16" height="12" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="4" x2="16" y2="4" stroke="#141312" stroke-width="1.2" stroke-opacity="0.45"/>
+      <line x1="0" y1="9" x2="16" y2="9" stroke="#141312" stroke-width="1.2" stroke-opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <!-- Warm Rag Paper Background -->
+  <rect width="1200" height="900" fill="url(#sky)"/>
+
+  <!-- Outer Archival Plate Border -->
+  <rect x="28" y="28" width="1144" height="844" fill="none" stroke="#141312" stroke-width="1.5" stroke-opacity="0.4"/>
+  <rect x="36" y="36" width="1128" height="828" fill="none" stroke="#141312" stroke-width="0.75" stroke-opacity="0.25"/>
+
+  <!-- Distant Banyan & Mahogany Silhouette -->
+  <g fill="#2A2825" opacity="0.28">
+    <circle cx="960" cy="340" r="170"/>
+    <circle cx="1060" cy="390" r="140"/>
+    <circle cx="840" cy="400" r="130"/>
+  </g>
+
+  <!-- Aurobindo Bhavan Brutalist & Red-Brick Elevation -->
+  <g transform="translate(80, 140)">
+    <!-- Main Upper Facade -->
+    <rect x="60" y="40" width="760" height="390" fill="#DFDBD2" stroke="#141312" stroke-width="1.5"/>
+    <!-- Terracotta Brick Wing -->
+    <rect x="60" y="40" width="220" height="390" fill="url(#brick)" stroke="#141312" stroke-width="1.5"/>
+
+    <!-- Deep Cantilevered Monsoon Sun-Breaker Fins (Brise-Soleil) -->
+    <g stroke="#141312" stroke-width="1.5" fill="#CFC9BC">
+      <rect x="280" y="70" width="520" height="24" fill="#1E1C1A"/>
+      <rect x="280" y="185" width="520" height="22" fill="#1E1C1A"/>
+      <rect x="280" y="300" width="520" height="22" fill="#1E1C1A"/>
+    </g>
+
+    <!-- Vertical Concrete Colonnade Pillars -->
+    <g fill="#E9E5DC" stroke="#141312" stroke-width="1.5">
+      <rect x="280" y="40" width="22" height="390"/>
+      <rect x="380" y="40" width="22" height="390"/>
+      <rect x="480" y="40" width="22" height="390"/>
+      <rect x="580" y="40" width="22" height="390"/>
+      <rect x="680" y="40" width="22" height="390"/>
+      <rect x="780" y="40" width="22" height="390"/>
+    </g>
+
+    <!-- Recessed Veranda Louvers & Seminar Windows -->
+    <g fill="url(#louvers)" stroke="#141312" stroke-width="1">
+      <rect x="314" y="106" width="54" height="68"/>
+      <rect x="414" y="106" width="54" height="68"/>
+      <rect x="514" y="106" width="54" height="68"/>
+      <rect x="614" y="106" width="54" height="68"/>
+      <rect x="714" y="106" width="54" height="68"/>
+
+      <rect x="314" y="220" width="54" height="68"/>
+      <rect x="414" y="220" width="54" height="68"/>
+      <rect x="514" y="220" width="54" height="68"/>
+      <rect x="614" y="220" width="54" height="68"/>
+      <rect x="714" y="220" width="54" height="68"/>
+    </g>
+
+    <!-- Warm Lit Seminar Room Window in Monsoon Dusk -->
+    <rect x="514" y="220" width="54" height="68" fill="#D99B52" fill-opacity="0.75" stroke="#141312" stroke-width="1.2"/>
+
+    <!-- Ground Floor Open Portico Arches / Bays -->
+    <g fill="#141312" opacity="0.88">
+      <rect x="302" y="330" width="78" height="100"/>
+      <rect x="402" y="330" width="78" height="100"/>
+      <rect x="502" y="330" width="78" height="100"/>
+      <rect x="602" y="330" width="78" height="100"/>
+      <rect x="702" y="330" width="78" height="100"/>
+    </g>
+
+    <!-- Brick Wing Tall Staircase Window -->
+    <rect x="135" y="90" width="70" height="270" fill="#1C1A17" stroke="#E9E5DC" stroke-width="1.2"/>
+    <line x1="170" y1="90" x2="170" y2="360" stroke="#E9E5DC" stroke-width="1"/>
+    <line x1="135" y1="180" x2="205" y2="180" stroke="#E9E5DC" stroke-width="1"/>
+    <line x1="135" y1="270" x2="205" y2="270" stroke="#E9E5DC" stroke-width="1"/>
+  </g>
+
+  <!-- Rain-Slicked Courtyard Flagstones & Inverted Reflection -->
+  <rect x="36" y="570" width="1128" height="294" fill="url(#puddle)"/>
+
+  <!-- Reflected Colonnade Lines in Wet Courtyard -->
+  <g stroke="#E7E2D8" stroke-opacity="0.22" stroke-width="1.2">
+    <line x1="360" y1="575" x2="360" y2="790"/>
+    <line x1="460" y1="575" x2="460" y2="810"/>
+    <line x1="560" y1="575" x2="560" y2="780"/>
+    <line x1="660" y1="575" x2="660" y2="800"/>
+    <line x1="760" y1="575" x2="760" y2="790"/>
+    <line x1="860" y1="575" x2="860" y2="770"/>
+  </g>
+
+  <!-- Warm Window Reflection on Wet Stone -->
+  <rect x="594" y="600" width="54" height="110" fill="#D99B52" fill-opacity="0.25"/>
+
+  <!-- Concentric Rain Ripples -->
+  <g fill="none" stroke="#E7E2D8" stroke-opacity="0.3" stroke-width="1">
+    <ellipse cx="320" cy="690" rx="65" ry="12"/>
+    <ellipse cx="320" cy="690" rx="32" ry="6"/>
+    <ellipse cx="620" cy="740" rx="85" ry="15"/>
+    <ellipse cx="620" cy="740" rx="44" ry="8"/>
+    <ellipse cx="890" cy="660" rx="50" ry="9"/>
+  </g>
+
+  <!-- Diagonal Monsoon Rain Overlay -->
+  <rect x="36" y="36" width="1128" height="828" fill="url(#rain)"/>
+
+  <!-- Archival Plate Stamp in Margin -->
+  <g font-family="Georgia, serif" font-size="13" fill="#E7E2D8" fill-opacity="0.7" letter-spacing="3">
+    <text x="64" y="836">JUALS ARCHIVAL PLATE I · AUROBINDO BHAVAN MONSOON STUDY · 22.4989° N, 88.3714° E</text>
+  </g>
+</svg>

@@ -1,148 +1,147 @@
-import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { siteConfig } from "../data/siteConfig";
-import { Mail, Calendar, FileText, CheckCircle2, Instagram } from "lucide-react";
 
 export function Submissions() {
+  const { submissions, about } = siteConfig;
+
   return (
     <div className="flex min-h-screen flex-col bg-paper">
       <Header />
 
       <main className="flex-1">
-        <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-              Open Call for Volume 2026-27
+        <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+          {/* Broadsheet Masthead */}
+          <div className="border-b border-ink/12 pb-10">
+            <div className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-ink-muted tabular-nums">
+              Editorial Dispatch &middot; Volume 2026&ndash;27
             </div>
 
-            <h1 className="font-serif text-5xl font-medium tracking-tight text-ink sm:text-6xl">
-              Call for Submissions
+            <h1 className="font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl lg:text-6xl">
+              {submissions.headline}
             </h1>
 
-            <p className="mt-6 text-xl leading-relaxed text-ink-light">
-              The Jadavpur University Arts and Literary Society (JUALS) invites original, unpublished submissions of poetry, short prose, critical reviews, commentary, and artwork for our upcoming digital edition and annual print anthology.
+            <p className="mt-5 max-w-3xl text-lg sm:text-xl leading-relaxed text-ink-light">
+              {submissions.subtext}
             </p>
-          </motion.div>
+          </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="rounded-lg border border-ink/10 bg-paper p-6 shadow-xs">
-              <div className="flex items-center gap-3 text-ink mb-3">
-                <Calendar className="h-5 w-5 text-accent" />
-                <h3 className="font-serif text-xl font-semibold">Timeline & Deadlines</h3>
+          {/* Two-Column Architectural Specification Strip */}
+          <div className="grid grid-cols-1 md:grid-cols-2 border-b border-ink/12 divide-y md:divide-y-0 md:divide-x divide-ink/10">
+            <div className="py-8 md:pr-10">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-muted mb-2">
+                {submissions.readingPeriodLabel}
               </div>
-              <p className="text-sm text-ink-light leading-relaxed">
-                Submissions are reviewed on a rolling basis. Works received by the <strong>last Sunday of each month</strong> are considered for the immediate issue.
+              <p className="text-sm sm:text-base text-ink-light leading-relaxed">
+                {submissions.readingPeriodValue}
               </p>
             </div>
 
-            <div className="rounded-lg border border-ink/10 bg-paper p-6 shadow-xs">
-              <div className="flex items-center gap-3 text-ink mb-3">
-                <Mail className="h-5 w-5 text-accent" />
-                <h3 className="font-serif text-xl font-semibold">How to Submit</h3>
+            <div className="py-8 md:pl-10">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-muted mb-2">
+                {submissions.dispatchLabel}
               </div>
-              <p className="text-sm text-ink-light leading-relaxed">
-                Email your work as an attachment (.docx, .pdf, or high-res image) to{" "}
-                <a 
-                  href={`mailto:${siteConfig.about.contactEmail}?subject=JUALS Submission - [Genre] - [Your Name]`} 
-                  className="font-medium text-accent underline hover:text-ink transition-colors"
+              <p className="text-sm sm:text-base text-ink-light leading-relaxed">
+                {submissions.dispatchFormat}{" "}
+                <a
+                  href={`mailto:${about.contactEmail}?subject=JUALS — [Genre] — [Author Name]`}
+                  className="font-medium text-accent underline underline-offset-4 hover:text-ink transition-colors duration-150"
                 >
-                  {siteConfig.about.contactEmail}
+                  {about.contactEmail}
                 </a>
               </p>
             </div>
           </div>
 
-          {/* Submission Guidelines */}
-          <div className="mt-16 space-y-12">
-            <div>
-              <h2 className="font-serif text-3xl font-medium text-ink mb-6">
-                Category Guidelines
+          {/* Numbered Genre Specifications (01–04) */}
+          <div className="mt-14">
+            <div className="mb-6 flex items-baseline justify-between">
+              <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
+                Department Specifications
               </h2>
-              
-              <div className="space-y-6">
-                <div className="border-l-2 border-accent pl-6 py-1">
-                  <h4 className="font-serif text-xl font-medium text-ink">Poetry</h4>
-                  <p className="mt-1 text-sm text-ink-light leading-relaxed">
-                    Submit up to 3 poems in a single document. Both English and translated Bengali/vernacular poems (accompanied by original text) are welcome. No strict form constraints.
-                  </p>
-                </div>
-
-                <div className="border-l-2 border-ink/30 pl-6 py-1">
-                  <h4 className="font-serif text-xl font-medium text-ink">Prose & Short Fiction</h4>
-                  <p className="mt-1 text-sm text-ink-light leading-relaxed">
-                    Short stories, memoirs, and narrative non-fiction. Suggested length: 800 to 2,500 words. Flash fiction pieces under 500 words are also encouraged.
-                  </p>
-                </div>
-
-                <div className="border-l-2 border-ink/30 pl-6 py-1">
-                  <h4 className="font-serif text-xl font-medium text-ink">Reviews & Critical Essays</h4>
-                  <p className="mt-1 text-sm text-ink-light leading-relaxed">
-                    Critical evaluations of books, cinema, theatrical productions, music, or translations. Suggested length: 1,000 to 1,800 words.
-                  </p>
-                </div>
-
-                <div className="border-l-2 border-ink/30 pl-6 py-1">
-                  <h4 className="font-serif text-xl font-medium text-ink">Artwork & Visual Media</h4>
-                  <p className="mt-1 text-sm text-ink-light leading-relaxed">
-                    High-resolution sketches, paintings, digital art, photography, or comic strips (minimum 300 DPI, JPG or PNG format). Please include a title and brief artist's note.
-                  </p>
-                </div>
-              </div>
+              <span className="text-[11px] uppercase tracking-[0.16em] text-ink-muted tabular-nums">
+                01 &ndash; 0{submissions.categories.length}
+              </span>
             </div>
 
-            {/* General Rules */}
-            <div className="rounded-lg bg-ink/5 p-8">
-              <h3 className="font-serif text-2xl font-medium text-ink mb-4">
-                General Submission Rules
-              </h3>
-              <ul className="space-y-3 text-sm text-ink-light">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>All work must be original and free from plagiarism. Simultaneous submissions are permitted, provided you notify us immediately upon acceptance elsewhere.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Include a brief 50-word author bio and your department/affiliation in the email body.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Submissions are open to Jadavpur University students, alumni, and creative writers/artists from university circles across India.</span>
-                </li>
-              </ul>
-            </div>
+            <div className="divide-y divide-ink/10 border-y border-ink/12">
+              {submissions.categories.map((cat) => (
+                <div
+                  key={cat.code}
+                  className="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline"
+                >
+                  <div className="md:col-span-4 flex items-baseline gap-4">
+                    <span className="text-xs font-medium uppercase tracking-[0.16em] text-ink-muted tabular-nums">
+                      {cat.code}
+                    </span>
+                    <h3 className="font-serif text-2xl font-medium text-ink">
+                      {cat.title}
+                    </h3>
+                  </div>
 
-            {/* Call to action */}
-            <div className="text-center py-8 border-t border-ink/10">
-              <h3 className="font-serif text-2xl font-medium text-ink mb-3">
-                Have a piece ready for consideration?
-              </h3>
-              <p className="text-sm text-ink-light mb-6">
-                Send your drafts or inquiries directly to our editorial inbox or reach out via Instagram.
+                  <div className="md:col-span-8">
+                    <div className="text-xs font-medium uppercase tracking-[0.14em] text-accent mb-2.5 tabular-nums">
+                      {cat.specification}
+                    </div>
+                    <p className="text-sm sm:text-base text-ink-light leading-relaxed">
+                      {cat.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Editorial Protocol & Rights */}
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-ink/12 pb-14">
+            <div className="md:col-span-4">
+              <h2 className="font-serif text-2xl font-medium text-ink">
+                Editorial Protocol
+              </h2>
+              <p className="mt-2 text-xs text-ink-muted leading-relaxed">
+                Standard manuscript preparation and archival terms for contributors.
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <a
-                  href={`mailto:${siteConfig.about.contactEmail}?subject=JUALS Submission - [Genre]`}
-                  className="inline-flex items-center gap-2 rounded-sm bg-ink px-6 py-3 text-xs font-semibold uppercase tracking-wider text-paper hover:bg-accent transition-colors"
-                >
-                  <Mail className="h-4 w-4" />
-                  Email Your Submission
-                </a>
-                <a
-                  href="https://www.instagram.com/juliterarysociety/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-sm border border-ink/20 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-ink hover:border-accent hover:text-accent transition-colors"
-                >
-                  <Instagram className="h-4 w-4" />
-                  DM on Instagram
-                </a>
-              </div>
+            </div>
+
+            <div className="md:col-span-8 divide-y divide-ink/10 border-t border-ink/10 md:border-t-0">
+              {submissions.editorialNotes.map((note, idx) => (
+                <div key={idx} className="py-4 first:pt-0 last:pb-0 flex items-baseline gap-4">
+                  <span className="text-xs font-medium uppercase tracking-[0.14em] text-ink-muted tabular-nums shrink-0">
+                    0{idx + 1}.
+                  </span>
+                  <p className="text-sm text-ink-light leading-relaxed">{note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Direct Dispatch Footer */}
+          <div className="pt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div>
+              <h3 className="font-serif text-2xl font-medium text-ink">
+                Ready to submit a manuscript or visual folio?
+              </h3>
+              <p className="mt-1 text-sm text-ink-light">
+                Address your dispatch directly to the editorial board at{" "}
+                <span className="text-ink font-medium">{about.contactEmail}</span>.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
+              <a
+                href={`mailto:${about.contactEmail}?subject=JUALS — [Genre] — [Author Name]`}
+                className="inline-flex h-10 items-center justify-center bg-ink px-5 text-[11px] font-medium uppercase tracking-[0.15em] text-paper hover:bg-accent transition-colors duration-150"
+              >
+                Dispatch via Email &rarr;
+              </a>
+              <a
+                href="https://www.instagram.com/juliterarysociety/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 items-center justify-center border border-ink/25 px-5 text-[11px] font-medium uppercase tracking-[0.15em] text-ink hover:border-accent hover:text-accent transition-colors duration-150"
+              >
+                Instagram
+              </a>
             </div>
           </div>
         </section>

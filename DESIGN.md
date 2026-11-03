@@ -1,95 +1,80 @@
 # DESIGN.md — JUALS Design System & Typographic Specification
 
-This document defines the formal visual language, mathematical typeset scales, color palette tokens, and responsive layout guidelines for the **Jadavpur University Arts and Literary Society (JUALS)** digital platform, adhering to the Google Stitch / editorial design principles.
+This document defines the formal visual language, mathematical typeset scales, color palette tokens, and responsive layout guidelines for the **Jadavpur University Arts and Literary Society (JUALS)** digital platform, following a 9-pass `unslop` editorial review (*Spacing → Color → Icons → Copy → Type → Layout → Details → Visuals → Motion*).
 
 ---
 
 ## 1. Editorial Archetype & Visual Philosophy
 
-- **Archetype**: Modern Literary Quarterly & Collegiate Broadside (*The Paris Review*, *Granta*, *London Review of Books*, Kolkata Little Magazines).
-- **Core Tenet**: High typographic discipline, generous negative space, purposeful contrast, and zero artificial ornamentation (no neon gradients, no synthetic heavy drop shadows, no nested rounded cards).
+- **Archetype**: Modern Literary Quarterly & Archival Broadsheet (*The Paris Review*, *n+1*, *Granta*, *London Review of Books*, Kolkata Little Magazines).
+- **Core Tenet**: High typographic discipline, structural hairline grids, museum-grade rectilinear plate framing, and zero synthetic UI tells (no warm-cream/terracotta SaaS defaults, no pulsing status pills, no left-border accent stripes, no mid-sentence colored italic headline spans, no nested cards).
 - **Surface Contrast**:
-  - Background: Archetypal warm cream parchment (`#FBF9F5`).
-  - Container / Card Layer: Elevated pure parchment (`#FFFFFF` with warm undertone) or crisp divider rules (`#1A1917` at 6% to 12% opacity).
-  - Difference in luminance complies with optical readability and WCAG AAA standards.
+  - Background: Crisp unbleached cotton rag archival paper (`#F7F5F0`).
+  - Plate / Elevated Surface: Pure gallery white (`#FFFFFF`) and stone-tinted secondary wash (`#EFECE6`).
+  - Structural Separation: Exposed `1px` hairline rules (`rgba(20, 19, 18, 0.09)`).
 
 ---
 
-## 2. Color Palette & Token System
+## 2. Color Palette & Token System (60-30-10 Budget)
 
-All colors are mathematically selected to prevent pure `#000000` / `#FFFFFF` eye-strain, incorporating a warm amber/umber undertone (<4% saturation in neutrals).
+All colors are calibrated for archival print authenticity and WCAG AAA contrast without yellow/orange cast:
 
 | Token Name | Hex Code | RGB | Role / Usage |
 | :--- | :--- | :--- | :--- |
-| `--color-paper` | `#FBF9F5` | 251, 249, 245 | Primary canvas / page background (Parchment) |
-| `--color-paper-elevated` | `#FFFFFF` | 255, 255, 255 | Modals, menu drawers, lightboxes |
-| `--color-paper-muted` | `#F2EFEB` | 242, 239, 235 | Subtle secondary surfaces, table headers, hairline fills |
-| `--color-ink` | `#1A1917` | 26, 25, 23 | Primary deep ink text, headings, dark buttons |
-| `--color-ink-light` | `#4F4D49` | 79, 77, 73 | Secondary prose, author biographies, dates, excerpts |
-| `--color-ink-muted` | `#8A8780` | 138, 135, 128 | Placeholders, decorative anchors, subtle metadata |
-| `--color-accent` | `#C85A32` | 200, 90, 50 | Terracotta / Burnt Sienna (Callouts, active underlines, open submission pill) |
-| `--color-accent-hover` | `#A84420` | 168, 68, 32 | Interactive focus / hover states |
-| `--color-accent-soft` | `#FAF0EB` | 250, 240, 235 | Accent tint for tags, callout banners, blockquote tint |
-| `--color-rule` | `rgba(26, 25, 23, 0.08)` | — | Hairline divider rules between sections |
+| `--color-paper` | `#F7F5F0` | 247, 245, 240 | Primary canvas / archival cotton rag background (60%) |
+| `--color-paper-elevated` | `#FFFFFF` | 255, 255, 255 | Elevated plates, modals, search overlay |
+| `--color-paper-muted` | `#EFECE6` | 239, 236, 230 | Subtle stone-tinted wash for callouts & figure mounts |
+| `--color-ink` | `#141312` | 20, 19, 18 | Primary deep carbon press ink for headings & prose (30%) |
+| `--color-ink-light` | `#4A4845` | 74, 72, 69 | Secondary prose, lead decks, excerpts, biographies |
+| `--color-ink-muted` | `#78756F` | 120, 117, 111 | Archival slate for tabular dates, plate numbers, metadata |
+| `--color-accent` | `#7A1C1C` | 122, 28, 28 | Deep Oxblood (Reserved strictly for active nav, links, and hover states — 10%) |
+| `--color-accent-hover` | `#581212` | 88, 18, 18 | Deep Oxblood interactive focus / hover state |
+| `--color-accent-soft` | `#F4EAE8` | 244, 234, 232 | Subtle oxblood wash |
+| `--color-rule` | `rgba(20, 19, 18, 0.09)` | — | Hairline divider rules across columns and rows |
 
 ---
 
 ## 3. Typographic Engine (Pairing 1: The Modern Literary Quarterly)
 
-Adopted for contemporary editorial prestige and screen legibility:
+Adopted for contemporary editorial prestige and long-form screen legibility:
 
 1. **Display & Heading Serif**: **`Newsreader`** (Optical Size Variable Range: `6pt`–`72pt`)  
    - Engineered specifically for long-form literary reading on digital displays with roots in 16th–18th century punch-cut French & Dutch book faces.
-   - Dynamic optical sizing provides razor-sharp display cuts for large mastheads and titles while maintaining open counters and sturdy serifs at smaller headings.
-   - Weights utilized: `500` (Medium), `600` (Semi-bold), and `italic`.
+   - Dynamic optical sizing provides razor-sharp display cuts for large broadsheet titles while maintaining open counters at smaller headings.
+   - Enforces `text-wrap: balance` on all headings (`h1`–`h6`) and `.editorial-dropcap` on opening article paragraphs.
 
 2. **Body Prose & Interface Sans**: **`Plus Jakarta Sans`**  
    - Modern geometric-humanist grotesque with generous x-height, clear apertures, and crisp letter spacing.
-   - Flawless readability across mobile screens, navigation ribbons, author metadata, and interactive controls.
-   - Weights utilized: `400` (Regular), `500` (Medium), `600` (Semi-bold).
+   - Enforces `tabular-nums` on all issue numbers, index rows (`01`, `02`, `03`), reading times, and publication dates.
 
-### Mathematical Typeset Scale (Major Second 1.125 / Perfect Fourth 1.333)
+### Mathematical Typeset Scale
 
 | Role | Font Family | Size (Mobile) | Size (Desktop) | Weight | Line Height | Tracking |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Masthead Brand** | Newsreader | 28px (`1.75rem`) | 38px (`2.375rem`) | 600 | 1.0 | `+0.22em` (caps) |
-| **Masthead Subtitle**| Plus Jakarta Sans | 9px (`0.5625rem`) | 11px (`0.6875rem`) | 600 | 1.2 | `+0.16em` (caps) |
-| **Hero Title (H1)** | Newsreader | 34px (`2.125rem`) | 58px (`3.625rem`) | 500 | 1.15 | `-0.02em` |
-| **Section Head (H2)**| Newsreader | 24px (`1.5rem`) | 38px (`2.375rem`) | 500 | 1.25 | `-0.015em` |
-| **Article Title (H3)**| Newsreader | 20px (`1.25rem`) | 25px (`1.5625rem`) | 600 | 1.3 | `-0.01em` |
-| **Blockquotes** | Newsreader | 19px (`1.1875rem`) | 25px (`1.5625rem`) | 400 italic | 1.55 | `0` |
-| **Body Prose** | Plus Jakarta Sans | 16px (`1.0rem`) | 17px (`1.0625rem`) | 400 | 1.65 | `+0.005em` |
-| **Meta & Captions** | Plus Jakarta Sans | 12px (`0.75rem`) | 13px (`0.8125rem`) | 400 | 1.5 | `+0.01em` |
-| **Tabs & Small Caps** | Plus Jakarta Sans | 11px (`0.6875rem`) | 12px (`0.75rem`) | 600 | 1.0 | `+0.14em` (caps) |
+| **Masthead Brand** | Newsreader | 20px (`1.25rem`) | 24px (`1.5rem`) | 500 | 1.0 | `+0.22em` (caps) |
+| **Hero / Broadsheet H1** | Newsreader | 36px (`2.25rem`) | 56px (`3.5rem`) | 500 | 1.10 | `-0.015em` |
+| **Lead Split Title (H2)**| Newsreader | 30px (`1.875rem`) | 42px (`2.6rem`) | 500 | 1.14 | `-0.015em` |
+| **Feature Title (H3)**| Newsreader | 24px (`1.5rem`) | 26.4px (`1.65rem`) | 500 | 1.20 | `-0.01em` |
+| **Blockquotes** | Newsreader | 24px (`1.5rem`) | 28px (`1.75rem`) | 400 italic | 1.55 | `0` |
+| **Body Prose** | Plus Jakarta Sans | 16px (`1.0rem`) | 18px (`1.125rem`) | 400 | 1.75 | `+0.005em` |
+| **Metadata & Index** | Plus Jakarta Sans | 11px (`0.6875rem`) | 11px (`0.6875rem`) | 500 | 1.4 | `+0.15em` (caps) |
 
 ---
 
-## 4. Editorial Voice & Messaging
+## 4. Layout & Surface Discipline (9-Pass Unslop Rules)
 
-- **Campus Ethos**: The platform avoids institutional and corporate jargon.
-- **Canonical Hero Statement**:
-  - *Lead*: "Words, ink, and"
-  - *Accent*: "campus echoes"
-  - *Tail*: "from Kolkata."
-  - *Subtext*: "The literary journal of Jadavpur University Arts & Literary Society. Fresh verse, narrative prose, critical reviews, and visual art."
-- **Tone**: Grounded in Kolkata's literary café debates, student writing, and intellectual independence.
-
----
-
-## 5. Spacing, Radii & Layout Rules
-
-1. **Anti-Nesting Rule**: Content sections must NOT feature cards nested inside cards. Groupings are distinguished using hairline rules (`border-ink/8`) and disciplined vertical rhythm (`gap-6` to `gap-12`).
-2. **Corner Radii**:
-   - Standard action buttons and tabs: `rounded-sm` (2px to 4px) to preserve literary print edges.
-   - Status indicators / badges: `rounded-full` (capsule format with inner padding).
-3. **Touch Targets**: All interactive elements (menu buttons, search toggles, links, tabs) maintain a minimum target dimension of 44x44px on mobile viewports.
-
----
-
-## 6. Responsive Behavior & Screen Audits
-
-### Mobile Viewport (< 640px)
-- **Topline**: Clean single-line header with no multi-tier banner crowding.
-- **Masthead Brandplate**: Balanced 3-point alignment preventing collisions on 320px–480px viewports.
-- **Tab Ribbon**: Smooth horizontal touch-scroll (`no-scrollbar`) with generous click targets.
-- **Hero & Article Titles**: Responsive scaling (`text-4xl sm:text-6xl md:text-7xl`) preventing title clipping.
+1. **Single-Row 3-Zone Top Bar (`Header.tsx`)**:
+   - Zone 1 (Left): `JUALS` wordmark + Jadavpur University institutional label.
+   - Zone 2 (Center): Single-line genre & section navigation (*All Works, Poetry, Prose, Artwork, Reviews, Opinion, About*) with a `1.5px` deep oxblood active underline. No redundant category filter bar on the Home page.
+   - Zone 3 (Right): Functional Search trigger, bordered `Submit` link, and `Index` drawer button.
+2. **3-Tier Editorial Front Page (`Home.tsx`)**:
+   - **Tier 1 (Lead Dispatch)**: 12-column asymmetric split (7-column rectilinear plate + 5-column vertical-hairline-separated deck).
+   - **Tier 2 (Selected Features)**: 2-column feature grid for prose, poetry, and criticism.
+   - **Tier 3 (Reading Index)**: Text-led horizontal archive rows with tabular index numbers (`01`, `02`, `03`), genre tags, titles, contributors, and dates.
+3. **Daylight Broadsheet Article View (`Post.tsx`)**:
+   - Opens on the crisp archival paper canvas with an unboxed metadata line (`GENRE · DATE · READ TIME`), balanced display headline, italic deck, hairline-bordered author byline bar, and framed cover plate (`Fig. 1`) above a `65ch` prose column with a 3-line literary drop-cap.
+4. **Zero-Pill & Zero-Stripe Rule**:
+   - No `rounded-full` status pills or `animate-pulse` dots.
+   - No `border-l-2` left accent stripes on blockquotes, callouts, or submission guidelines; all quotes and callouts use top-and-bottom hairline rules (`border-y`).
+   - All visual plates use sharp rectilinear corners (`rounded-none border border-ink/10`) without hover scale-zoom gimmicks.
+   - All micro-interactions settle within `150ms–200ms`.

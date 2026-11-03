@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <defs>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#221E1B"/>
+      <stop offset="100%" stop-color="#141210"/>
+    </linearGradient>
+    <linearGradient id="lead" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EBE6DC"/>
+      <stop offset="100%" stop-color="#C9C2B4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Warm Rag Paper Margin -->
+  <rect width="1200" height="900" fill="#F2EFE9"/>
+
+  <!-- Foundry Type Case Frame -->
+  <rect x="60" y="60" width="1080" height="780" fill="url(#wood)" stroke="#141312" stroke-width="3"/>
+  <rect x="84" y="84" width="1032" height="732" fill="none" stroke="#8C7A65" stroke-width="1.5" stroke-opacity="0.5"/>
+
+  <!-- Wooden Type-Case Compartments (4x3 Grid) -->
+  <g stroke="#5C4D3C" stroke-width="6" fill="none">
+    <line x1="342" y1="84" x2="342" y2="816"/>
+    <line x1="600" y1="84" x2="600" y2="816"/>
+    <line x1="858" y1="84" x2="858" y2="816"/>
+    <line x1="84" y1="328" x2="1116" y2="328"/>
+    <line x1="84" y1="572" x2="1116" y2="572"/>
+  </g>
+
+  <!-- Movable Metal Type Blocks & Bengali / Roman Glyphs -->
+  <g font-family="Georgia, serif" text-anchor="middle">
+    <!-- Compartment 1: Bengali Ka -->
+    <rect x="125" y="120" width="175" height="170" fill="#2D2926" stroke="#787166" stroke-width="1.5"/>
+    <text x="212" y="238" font-size="108" fill="url(#lead)">ক</text>
+    <text x="212" y="275" font-size="11" fill="#A69F91" letter-spacing="3">36 PT · BENGALI</text>
+
+    <!-- Compartment 2: Bengali Kha -->
+    <rect x="383" y="120" width="175" height="170" fill="#2D2926" stroke="#787166" stroke-width="1.5"/>
+    <text x="470" y="238" font-size="108" fill="url(#lead)">খ</text>
+    <text x="470" y="275" font-size="11" fill="#A69F91" letter-spacing="3">36 PT · FOUNDRY</text>
+
+    <!-- Compartment 3: Oxblood Inked Block (अ / আ) -->
+    <rect x="641" y="120" width="175" height="170" fill="#7A1C1C" stroke="#C85A52" stroke-width="1.5"/>
+    <text x="728" y="238" font-size="108" fill="#F7F5F0">আ</text>
+    <text x="728" y="275" font-size="11" fill="#F4EAE8" letter-spacing="3">PROOF INKED</text>
+
+    <!-- Compartment 4: Roman Serif J -->
+    <rect x="899" y="120" width="175" height="170" fill="#2D2926" stroke="#787166" stroke-width="1.5"/>
+    <text x="986" y="234" font-size="104" font-style="italic" fill="url(#lead)">J</text>
+    <text x="986" y="275" font-size="11" fill="#A69F91" letter-spacing="3">CASLON · ROMAN</text>
+
+    <!-- Row 2: Composing Stick & Specimen Strip -->
+    <rect x="125" y="364" width="433" height="170" fill="#EDE9DF" stroke="#141312" stroke-width="1.5"/>
+    <text x="341" y="425" font-size="14" fill="#7A1C1C" letter-spacing="5">PATUATOLA LANE · COLLEGE STREET</text>
+    <text x="341" y="468" font-size="32" fill="#141312" font-style="italic">“Against the frictionless page”</text>
+    <text x="341" y="506" font-size="12" fill="#52504C" letter-spacing="3">GALLEY PROOF NO. XIV · HAND-SET IN 12 PT</text>
+
+    <!-- Compartment 2.3: Bengali Ligature -->
+    <rect x="641" y="364" width="175" height="170" fill="#2D2926" stroke="#787166" stroke-width="1.5"/>
+    <text x="728" y="480" font-size="102" fill="url(#lead)">ক্ষ</text>
+    <text x="728" y="518" font-size="11" fill="#A69F91" letter-spacing="3">CONJUNCT TYPE</text>
+
+    <!-- Compartment 2.4: Section Fleuron -->
+    <rect x="899" y="364" width="175" height="170" fill="#2D2926" stroke="#787166" stroke-width="1.5"/>
+    <text x="986" y="478" font-size="96" fill="#D99B52">§</text>
+    <text x="986" y="518" font-size="11" fill="#A69F91" letter-spacing="3">SECTION MARK</text>
+
+    <!-- Row 3 -->
+    <rect x="125" y="608" width="175" height="170" fill="#2D2926" stroke="#787166" stroke-width="1.5"/>
+    <text x="212" y="724" font-size="104" fill="url(#lead)">শ</text>
+    <text x="212" y="762" font-size="11" fill="#A69F91" letter-spacing="3">LINOTYPE MAT</text>
+
+    <rect x="383" y="608" width="175" height="170" fill="#2D2926" stroke="#787166" stroke-width="1.5"/>
+    <text x="470" y="724" font-size="104" fill="url(#lead)">ব</text>
+    <text x="470" y="762" font-size="11" fill="#A69F91" letter-spacing="3">NICKEL-BRASS</text>
+
+    <!-- Broadsheet Colophon Stamp -->
+    <rect x="641" y="608" width="433" height="170" fill="#26221F" stroke="#7A1C1C" stroke-width="1.5"/>
+    <text x="857" y="666" font-size="13" fill="#D99B52" letter-spacing="4">JADAVPUR UNIVERSITY LITERARY ARCHIVE</text>
+    <text x="857" y="712" font-size="28" fill="#F7F5F0" letter-spacing="2">BOI PARA FOUNDRY PLATE IV</text>
+    <text x="857" y="750" font-size="12" fill="#A69F91" letter-spacing="3">AMHERST STREET &amp; COLLEGE STREET · KOLKATA</text>
+  </g>
+</svg>

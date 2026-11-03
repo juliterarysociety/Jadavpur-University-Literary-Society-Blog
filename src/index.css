@@ -6,15 +6,31 @@
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Newsreader", Georgia, Cambria, "Times New Roman", Times, serif;
   
-  --color-paper: #FBF9F5;
+  --color-paper: #F7F5F0;
   --color-paper-elevated: #FFFFFF;
-  --color-paper-muted: #F2EFEB;
-  --color-ink: #1A1917;
-  --color-ink-light: #4F4D49;
-  --color-ink-muted: #8A8780;
-  --color-accent: #C85A32;
-  --color-accent-hover: #A84420;
-  --color-accent-soft: #FAF0EB;
+  --color-paper-muted: #EFECE6;
+  --color-ink: #141312;
+  --color-ink-light: #4A4845;
+  --color-ink-muted: #726F69;
+  --color-accent: #7A1C1C;
+  --color-accent-hover: #581212;
+  --color-accent-soft: #F4EAE8;
+  --color-rule: rgba(20, 19, 18, 0.09);
+}
+
+/* Evening Ink Reading Atmosphere (Nocturnal Press Room Mode) */
+html[data-theme="evening"] {
+  --color-paper: #121110;
+  --color-paper-elevated: #1A1816;
+  --color-paper-muted: #1E1C19;
+  --color-ink: #EAE6DF;
+  --color-ink-light: #B8B3A8;
+  --color-ink-muted: #8C877E;
+  --color-accent: #D46A5E;
+  --color-accent-hover: #E58277;
+  --color-accent-soft: #2A1917;
+  --color-rule: rgba(234, 230, 223, 0.11);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -31,11 +47,33 @@
     letter-spacing: 0.005em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 220ms ease, color 220ms ease;
+    position: relative;
+  }
+
+  /* Subtle archival cotton rag paper grain overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+    opacity: 0.026;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  html[data-theme="evening"] body::before {
+    opacity: 0.035;
   }
   
   ::selection {
-    background-color: rgba(200, 90, 50, 0.2);
-    color: #1A1917;
+    background-color: rgba(122, 28, 28, 0.22);
+    color: var(--color-ink);
+  }
+
+  html[data-theme="evening"] ::selection {
+    background-color: rgba(212, 106, 94, 0.28);
+    color: #EAE6DF;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -43,7 +81,21 @@
     color: var(--color-ink);
     letter-spacing: -0.015em;
     font-weight: 500;
+    text-wrap: balance;
   }
+}
+
+/* Literary print drop-cap for opening article paragraphs */
+.editorial-dropcap::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.75rem;
+  line-height: 0.82;
+  padding-top: 0.2rem;
+  padding-right: 0.65rem;
+  padding-bottom: 0.1rem;
+  color: var(--color-accent);
+  font-weight: 500;
 }
 
 /* Custom utility for clean horizontal swipe containers without scrollbars */
@@ -53,4 +105,31 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Print-Ready Academic Broadsheet Offprint Rules */
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+
+  body::before {
+    display: none !important;
+  }
+
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 11pt;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, blockquote, p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  figure, blockquote, aside {
+    break-inside: avoid;
+  }
 }

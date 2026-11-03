@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
-import { X } from "lucide-react";
-import { useEffect } from "react";
+import { X, ZoomIn, ZoomOut } from "lucide-react";
+import { useEffect, useState } from "react";
 import { FadeImage } from "./FadeImage";
 
 interface LightboxProps {
@@ -12,24 +12,27 @@ interface LightboxProps {
 }
 
 export function Lightbox({ isOpen, onClose, src, alt, caption }: LightboxProps) {
+  const [isZoomed, setIsZoomed] = useState(false);
+
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
+      setIsZoomed(false);
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
-  // Handle escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
+      if (e.key === "z" || e.key === "Z") setIsZoomed((prev) => !prev);
     };
-    if (isOpen) window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    if (isOpen) window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
   return (
@@ -39,45 +42,71 @@ export function Lightbox({ isOpen, onClose, src, alt, caption }: LightboxProps) 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 backdrop-blur-md p-4 sm:p-8"
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-[100] flex flex-col bg-[#0F0E0D]/96 text-[#EAE6DF] backdrop-blur-md"
           onClick={onClose}
         >
-          <button 
-            className="absolute top-6 right-6 p-2 text-paper/50 hover:text-paper transition-colors z-10"
-            onClick={onClose}
-            aria-label="Close lightbox"
-          >
-            <X className="h-8 w-8" />
-          </button>
-          
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.95, opacity: 0, y: 10 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative max-h-full max-w-6xl w-full flex flex-col items-center justify-center"
+          <div
+            className="flex h-14 items-center justify-between border-b border-white/12 px-4 sm:px-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <FadeImage 
-              src={src} 
-              alt={alt} 
-              referrerPolicy="no-referrer"
-              className="max-h-[75vh] w-auto object-contain rounded-sm shadow-2xl shadow-black/60"
-            />
-            {caption && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="mt-8 text-center"
+            <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#A6A198]">
+              Archival Plate Inspection
+            </span>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setIsZoomed((prev) => !prev)}
+                className="inline-flex items-center gap-1.5 border border-white/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#EAE6DF] hover:border-[#D46A5E] hover:text-[#D46A5E] transition-colors duration-150"
               >
-                <p className="text-paper/90 font-serif text-xl md:text-2xl max-w-2xl italic leading-relaxed drop-shadow-md">
+                {isZoomed ? (
+                  <>
+                    <ZoomOut className="h-3.5 w-3.5" />
+                    <span>1.0× Fit</span>
+                  </>
+                ) : (
+                  <>
+                    <ZoomIn className="h-3.5 w-3.5" />
+                    <span>1.75× Detail</span>
+                  </>
+                )}
+              </button>
+              <button
+                type="button"
+                className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-[#A6A198] hover:text-white transition-colors"
+                onClick={onClose}
+                aria-label="Close lightbox"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div
+            className="flex-1 overflow-auto flex flex-col items-center justify-center p-4 sm:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              onClick={() => setIsZoomed((prev) => !prev)}
+              className={isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"}
+            >
+              <FadeImage
+                src={src}
+                alt={alt}
+                referrerPolicy="no-referrer"
+                className={`max-h-[74vh] w-auto object-contain border border-white/12 transition-transform duration-200 ${
+                  isZoomed ? "scale-150" : "scale-100"
+                }`}
+              />
+            </div>
+            {caption && (
+              <div className="mt-6 max-w-2xl text-center border-t border-white/12 pt-4">
+                <p className="text-[#EAE6DF]/90 font-serif text-base sm:text-lg italic leading-relaxed">
                   {caption}
                 </p>
-              </motion.div>
+              </div>
             )}
-          </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

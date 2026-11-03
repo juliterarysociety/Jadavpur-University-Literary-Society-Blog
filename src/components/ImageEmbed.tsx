@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { useState } from "react";
 import { cn } from "../lib/utils";
 import { Lightbox } from "./Lightbox";
@@ -16,38 +15,35 @@ export function ImageEmbed({ src, alt, caption, size = "default" }: ImageEmbedPr
 
   return (
     <>
-      <motion.figure 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      <figure
         className={cn(
-          "my-16 mx-auto",
-          size === "default" && "max-w-4xl px-4 sm:px-6 lg:px-8",
-          size === "wide" && "max-w-6xl px-4 sm:px-6 lg:px-8",
+          "my-12 mx-auto not-prose",
+          size === "default" && "max-w-3xl",
+          size === "wide" && "max-w-4xl",
           size === "full" && "w-full max-w-none"
         )}
       >
-        <button 
+        <button
           onClick={() => setIsLightboxOpen(true)}
-          className="w-full overflow-hidden rounded-sm bg-ink/5 cursor-zoom-in group"
+          className="w-full overflow-hidden rounded-none border border-ink/10 bg-paper-muted cursor-zoom-in group block"
         >
-          <FadeImage 
-            src={src} 
-            alt={alt} 
+          <FadeImage
+            src={src}
+            alt={alt}
             referrerPolicy="no-referrer"
-            className="w-full h-auto object-cover group-hover:scale-[1.02]"
+            className="w-full h-auto object-cover transition-opacity duration-200 group-hover:opacity-92"
             loading="lazy"
           />
         </button>
         {caption && (
-          <figcaption className="mt-4 text-center text-sm italic text-ink-light max-w-2xl mx-auto px-4">
-            {caption}
+          <figcaption className="mt-3 flex items-baseline justify-between border-b border-ink/8 pb-2.5 text-xs text-ink-muted">
+            <span className="font-serif italic text-ink-light text-sm">{caption}</span>
+            <span className="uppercase tracking-[0.14em] text-[10px] shrink-0 ml-4">Plate</span>
           </figcaption>
         )}
-      </motion.figure>
+      </figure>
 
-      <Lightbox 
+      <Lightbox
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}
         src={src}

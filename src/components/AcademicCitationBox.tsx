@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Copy, Check, Printer } from "lucide-react";
 import type { Article } from "../types";
 
 type CitationStyle = "mla" | "chicago" | "bibtex";
@@ -50,7 +49,6 @@ export function AcademicCitationBox({ article }: AcademicCitationBoxProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback copy if clipboard permission is restricted
       const textarea = document.createElement("textarea");
       textarea.value = currentCitation;
       document.body.appendChild(textarea);
@@ -69,9 +67,9 @@ export function AcademicCitationBox({ article }: AcademicCitationBoxProps) {
   return (
     <section
       aria-label="Academic citation and offprint tools"
-      className="my-12 border-y border-ink/15 bg-paper-muted/45 py-6 px-5 sm:px-7 print:break-inside-avoid"
+      className="my-12 border-y border-ink/15 py-6 print:break-inside-avoid"
     >
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-ink/10 pb-4">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
             Scholarly Offprint &amp; Bibliographic Record
@@ -87,12 +85,12 @@ export function AcademicCitationBox({ article }: AcademicCitationBoxProps) {
           </div>
         </div>
 
-        {/* Format Switcher & Print Broadsheet Button */}
-        <div className="flex flex-wrap items-center gap-2 print:hidden">
+        {/* Typographic Format Switcher & Actions */}
+        <div className="flex flex-wrap items-center gap-4 print:hidden">
           <div
             role="group"
             aria-label="Citation format"
-            className="inline-flex border border-ink/15 bg-paper p-0.5"
+            className="flex items-center gap-3.5"
           >
             {(
               [
@@ -105,10 +103,10 @@ export function AcademicCitationBox({ article }: AcademicCitationBoxProps) {
                 key={item.id}
                 type="button"
                 onClick={() => setStyle(item.id)}
-                className={`px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] whitespace-nowrap transition-colors duration-150 cursor-pointer ${
+                className={`pb-1 text-[11px] uppercase tracking-[0.14em] whitespace-nowrap border-b-2 transition-colors duration-150 cursor-pointer ${
                   style === item.id
-                    ? "bg-ink text-paper"
-                    : "text-ink-muted hover:text-ink"
+                    ? "border-accent text-accent font-semibold"
+                    : "border-transparent text-ink-muted hover:text-ink"
                 }`}
               >
                 {item.label}
@@ -116,31 +114,24 @@ export function AcademicCitationBox({ article }: AcademicCitationBoxProps) {
             ))}
           </div>
 
+          <span className="text-ink/20" aria-hidden="true">
+            |
+          </span>
+
           <button
             type="button"
             onClick={handleCopy}
-            className="inline-flex items-center gap-1.5 border border-ink/15 bg-paper px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink hover:border-accent hover:text-accent transition-colors duration-150 whitespace-nowrap cursor-pointer"
+            className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink hover:text-accent transition-colors duration-150 whitespace-nowrap cursor-pointer"
           >
-            {copied ? (
-              <>
-                <Check className="h-3.5 w-3.5 text-accent" />
-                <span className="text-accent">Copied</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-3.5 w-3.5" />
-                <span>Copy Citation</span>
-              </>
-            )}
+            {copied ? "Copied" : "Copy Citation"}
           </button>
 
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 border border-ink bg-ink px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-paper hover:bg-accent hover:border-accent transition-colors duration-150 whitespace-nowrap cursor-pointer"
+            className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent hover:text-ink transition-colors duration-150 whitespace-nowrap cursor-pointer"
           >
-            <Printer className="h-3.5 w-3.5" />
-            <span>Print Broadsheet</span>
+            Print Offprint
           </button>
         </div>
       </div>
@@ -148,7 +139,7 @@ export function AcademicCitationBox({ article }: AcademicCitationBoxProps) {
       {/* Formatted Citation Output */}
       <div className="mt-4">
         {style === "bibtex" ? (
-          <pre className="overflow-x-auto bg-paper border border-ink/10 p-4 font-mono text-xs leading-relaxed text-ink-light">
+          <pre className="overflow-x-auto border-l-2 border-ink/15 pl-4 py-1 font-mono text-xs leading-relaxed text-ink-light">
             {currentCitation}
           </pre>
         ) : (

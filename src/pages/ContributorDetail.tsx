@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { FadeImage } from "../components/FadeImage";
-import { Lightbox } from "../components/Lightbox";
+import { PlateLightbox } from "../components/PlateLightbox";
 import { authorsBySlug } from "../data/authors";
 import { articles } from "../data/articles";
 import { photoGallery } from "../data/photography";
@@ -27,8 +27,8 @@ export function ContributorDetail() {
 
       <main className="flex-1">
         {/* Top Breadcrumb Bar */}
-        <div className="border-b border-ink/10 bg-paper-muted/40">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-ink-muted">
+        <div className="border-b border-ink/10">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-ink-muted">
             <Link
               to="/contributors"
               className="hover:text-accent transition-colors duration-150"
@@ -256,16 +256,11 @@ export function ContributorDetail() {
 
       <Footer />
 
-      <Lightbox
-        isOpen={selectedPlateIdx !== null}
-        src={selectedPlateIdx !== null ? authoredPlates[selectedPlateIdx].src : ""}
-        alt={selectedPlateIdx !== null ? authoredPlates[selectedPlateIdx].alt : ""}
-        caption={
-          selectedPlateIdx !== null
-            ? `${authoredPlates[selectedPlateIdx].title} — ${authoredPlates[selectedPlateIdx].caption}`
-            : undefined
-        }
+      <PlateLightbox
+        plates={authoredPlates}
+        selectedIndex={selectedPlateIdx}
         onClose={() => setSelectedPlateIdx(null)}
+        onSelectIndex={(idx) => setSelectedPlateIdx(idx)}
       />
     </div>
   );

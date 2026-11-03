@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { FadeImage } from "../components/FadeImage";
-import { Lightbox } from "../components/Lightbox";
+import { PlateLightbox } from "../components/PlateLightbox";
 import { issues, currentIssue } from "../data/issues";
 import { articles } from "../data/articles";
 import { photoGallery } from "../data/photography";
@@ -29,23 +29,23 @@ export function Issues() {
       <Header />
 
       <main className="flex-1">
-        {/* Issue Switcher Ribbon */}
-        <div className="border-b border-ink/12 bg-paper-muted/40">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+        {/* Issue Switcher Hairline Row */}
+        <div className="border-b border-ink/12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
             <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
               Seasonal Folios &amp; Archival Volumes
             </span>
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <div className="flex flex-wrap items-center gap-5 sm:gap-7">
               {issues.map((item) => {
                 const isSelected = item.slug === issue.slug;
                 return (
                   <Link
                     key={item.id}
                     to={`/issues/${item.slug}`}
-                    className={`text-[11px] uppercase tracking-[0.15em] tabular-nums transition-colors duration-150 ${
+                    className={`pb-1 text-[11px] uppercase tracking-[0.15em] tabular-nums border-b-2 transition-colors duration-150 ${
                       isSelected
-                        ? "text-accent font-semibold underline underline-offset-4"
-                        : "text-ink-light hover:text-ink"
+                        ? "border-accent text-accent font-semibold"
+                        : "border-transparent text-ink-light hover:text-ink"
                     }`}
                   >
                     {item.volume} &middot; {item.issueNumber}
@@ -284,7 +284,7 @@ export function Issues() {
           </section>
         )}
 
-        {/* Past Issues Vault */}
+        {/* Past Issues Vault (Unboxed 3-Column Hairline Ledger) */}
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
           <div className="mb-8 flex items-baseline justify-between">
             <div>
@@ -300,8 +300,8 @@ export function Issues() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {issues.map((vol) => {
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-ink/12 border-y border-ink/12">
+            {issues.map((vol, idx) => {
               const isCurrentView = vol.slug === issue.slug;
               const volArticleCount = articles.filter(
                 (a) => a.issueSlug === vol.slug
@@ -313,10 +313,12 @@ export function Issues() {
               return (
                 <article
                   key={vol.id}
-                  className={`flex flex-col justify-between border p-6 transition-colors duration-150 ${
-                    isCurrentView
-                      ? "border-accent bg-paper-muted/50"
-                      : "border-ink/12 bg-paper hover:border-ink/30"
+                  className={`py-8 flex flex-col justify-between ${
+                    idx === 0
+                      ? "md:pr-8"
+                      : idx === 1
+                      ? "md:px-8"
+                      : "md:pl-8"
                   }`}
                 >
                   <div>
@@ -348,7 +350,11 @@ export function Issues() {
                     </span>
                     <Link
                       to={`/issues/${vol.slug}`}
-                      className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent hover:text-ink transition-colors duration-150"
+                      className={`text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors duration-150 ${
+                        isCurrentView
+                          ? "text-ink-muted"
+                          : "text-accent hover:text-ink"
+                      }`}
                     >
                       {isCurrentView ? "Viewing Folio" : "Open Folio →"}
                     </Link>
@@ -362,20 +368,11 @@ export function Issues() {
 
       <Footer />
 
-      <Lightbox
-        isOpen={selectedPlateIndex !== null}
-        src={
-          selectedPlateIndex !== null ? issuePlates[selectedPlateIndex].src : ""
-        }
-        alt={
-          selectedPlateIndex !== null ? issuePlates[selectedPlateIndex].alt : ""
-        }
-        caption={
-          selectedPlateIndex !== null
-            ? `${issuePlates[selectedPlateIndex].title} — ${issuePlates[selectedPlateIndex].caption}`
-            : undefined
-        }
+      <PlateLightbox
+        plates={issuePlates}
+        selectedIndex={selectedPlateIndex}
         onClose={() => setSelectedPlateIndex(null)}
+        onSelectIndex={(idx) => setSelectedPlateIndex(idx)}
       />
     </div>
   );

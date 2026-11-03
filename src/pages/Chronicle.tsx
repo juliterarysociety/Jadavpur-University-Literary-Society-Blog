@@ -39,9 +39,9 @@ export function Chronicle() {
             </div>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="mt-8 pt-6 border-t border-ink/10 flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted mr-3">
+          {/* Filter Tabs (Typographic Underline Tabs) */}
+          <div className="mt-8 pt-6 border-t border-ink/10 flex flex-wrap items-center gap-5">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
               Chronicle View:
             </span>
             {(["All", "Upcoming", "Archival Dispatch"] as const).map((tab) => {
@@ -49,11 +49,12 @@ export function Chronicle() {
               return (
                 <button
                   key={tab}
+                  type="button"
                   onClick={() => setFilter(tab)}
-                  className={`px-3.5 py-1.5 text-[11px] uppercase tracking-[0.15em] border transition-colors duration-150 ${
+                  className={`pb-1.5 text-[11px] uppercase tracking-[0.15em] border-b-2 transition-colors duration-150 cursor-pointer ${
                     isActive
-                      ? "border-accent bg-accent text-paper font-semibold"
-                      : "border-ink/15 text-ink-light hover:border-ink hover:text-ink"
+                      ? "border-accent text-accent font-semibold"
+                      : "border-transparent text-ink-light hover:text-ink"
                   }`}
                 >
                   {tab === "All" ? "All Gatherings" : tab}
@@ -113,11 +114,13 @@ export function Chronicle() {
                   </p>
 
                   {event.dispatchNotes && (
-                    <div className="border-y border-ink/10 bg-paper-muted/50 py-3 px-4 text-xs text-ink-light leading-relaxed">
+                    <div className="border-t border-ink/10 pt-3 text-xs text-ink-light leading-relaxed">
                       <span className="font-semibold uppercase tracking-[0.14em] text-ink mr-2">
-                        Note:
+                        Archival Note:
                       </span>
-                      {event.dispatchNotes}
+                      <span className="font-serif italic">
+                        {event.dispatchNotes}
+                      </span>
                     </div>
                   )}
                 </div>

@@ -37,13 +37,10 @@ export function PoetryBlock({
   };
 
   return (
-    <figure className="not-prose my-12 border-y border-ink/15 bg-paper-muted/35 py-8 px-5 sm:px-10 print:break-inside-avoid">
+    <figure className="not-prose my-12 border-y border-ink/15 py-8 print:break-inside-avoid">
       {/* Poem Header / Title */}
       {title && (
         <header className="mb-6 border-b border-ink/10 pb-4">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent mb-1.5">
-            Verse Folio
-          </div>
           <h3 className="font-serif text-xl sm:text-2xl font-medium text-ink tracking-tight">
             {title}
           </h3>

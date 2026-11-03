@@ -55,9 +55,9 @@ export function Contributors() {
             </div>
           </div>
 
-          {/* Discipline Filter Tabs (Zero-Pill Rectilinear Ledger Tabs) */}
-          <div className="mt-8 pt-6 border-t border-ink/10 flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted mr-3">
+          {/* Discipline Filter Tabs (Typographic Underline Tabs) */}
+          <div className="mt-8 pt-6 border-t border-ink/10 flex flex-wrap items-center gap-5">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
               Discipline:
             </span>
             {DISCIPLINE_FILTERS.map((discipline) => {
@@ -65,11 +65,12 @@ export function Contributors() {
               return (
                 <button
                   key={discipline}
+                  type="button"
                   onClick={() => setActiveDiscipline(discipline)}
-                  className={`px-3 py-1.5 text-[11px] uppercase tracking-[0.15em] border transition-colors duration-150 ${
+                  className={`pb-1.5 text-[11px] uppercase tracking-[0.15em] border-b-2 transition-colors duration-150 cursor-pointer ${
                     isActive
-                      ? "border-accent bg-accent text-paper font-semibold"
-                      : "border-ink/15 text-ink-light hover:border-ink hover:text-ink"
+                      ? "border-accent text-accent font-semibold"
+                      : "border-transparent text-ink-light hover:text-ink"
                   }`}
                 >
                   {discipline}

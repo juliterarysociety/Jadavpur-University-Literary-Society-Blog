@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
-import { Printer } from "lucide-react";
 import { articles } from "../data/articles";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -183,14 +182,17 @@ export function Post() {
                 </div>
               )}
 
+              <span className="print:hidden text-ink/20" aria-hidden="true">
+                |
+              </span>
+
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="print:hidden inline-flex items-center gap-1.5 border border-ink/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted hover:border-ink hover:text-ink transition-colors duration-150 cursor-pointer"
+                className="print:hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted hover:text-accent transition-colors duration-150 cursor-pointer"
                 title="Print broadsheet offprint"
               >
-                <Printer className="h-3 w-3" />
-                <span>Offprint</span>
+                Print Offprint
               </button>
             </div>
           </div>
@@ -419,7 +421,7 @@ export function Post() {
                         return (
                           <aside
                             key={idx}
-                            className="my-10 border-y border-ink/15 bg-paper-muted/60 py-6 px-6 not-prose"
+                            className="my-10 border-y border-ink/15 py-6 not-prose"
                           >
                             {block.title && (
                               <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent mb-2">

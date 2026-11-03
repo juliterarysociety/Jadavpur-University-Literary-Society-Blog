@@ -1,58 +1,57 @@
-# Pillar 1 Implementation Plan: Visual Surface, Editorial Polish & Archival Tactility
+# UI Unslop Implementation Plan — JUALS Periodical Interface
 
-## 1. Architectural Vision & Aesthetic Direction
-Building on the institutional architecture (Pillar 2) and scholarly reading mechanics (Pillar 3), **Pillar 1** elevates the Jadavpur University Arts and Literary Society (*JUALS*) periodical to a museum-grade editorial surface inspired by *The Paris Review*, *Granta*, and *Cabinet Magazine*:
-
-- **Dual Reading Atmosphere (Daylight Archival Paper & Evening Ink Mode)**:
-  - **Daylight Archival Paper (Default)**: Warm archival rag paper (`#F7F5F0`), elevated folio surface (`#EFECE6`), deep carbon ink (`#141312`), warm graphite (`#52504C`), and Jadavpur oxblood (`#7A1C1C`), finished with a subtle tactile paper micro-grain overlay.
-  - **Evening Ink Mode (Toggleable & Persisted)**: Deep nocturnal press room slate (`#121110`), elevated warm charcoal folio (`#1A1816`), warm parchment ink (`#EAE6DF`), muted stone secondary text (`#9E9A93`), and luminous vermilion-oxblood (`#C85A52`), driven by CSS custom properties (`--bg-paper`, `--bg-elevated`, `--text-ink`, `--text-muted`, `--accent-oxblood`, `--border-ink`) so every view adapts seamlessly without jarring contrast shifts.
-- **Streamlined 5-Link Top Masthead & Colophon Strip**:
-  - Top archival colophon strip displaying current issue volume (`VOL. XIV · NO. 1 — MONSOON–WINTER 2024`), campus dateline (`JADAVPUR UNIVERSITY · KOLKATA`), and the interactive **Daylight / Evening Ink** atmosphere switcher.
-  - Uncrowded single-row primary navigation bar featuring the `JUALS` serif masthead, 5 primary links (`Issues`, `Poetry`, `Prose`, `Artwork`, `Chronicle`), live Search trigger, and `Index` drawer button (which exposes the full 8-route periodical directory, contributor roster, and masthead metadata).
-- **Bespoke Jadavpur & Kolkata Editorial Cover Plates**:
-  - Generate curated, high-resolution editorial plates using `generate_image` saved under `/public/images/editorial/` (e.g., Monsoon Courtyard at Aurobindo Bhavan, College Street Letterpress & Boi Para, Subarnarekha Riverbank, Nocturnal Tramlines on Rashbehari Avenue) and wire them into `issues.ts`, `articles.ts`, and `photography.ts`.
-- **Museum Lightbox & Archival Plate Viewer**:
-  - Clicking any visual plate on the **Artwork** folio (`/artwork`) or article `ImageEmbed` / `Gallery` opens a full-viewport museum inspection modal with high-contrast archival darkroom backing, 1x / 2x pan-and-zoom toggle, accession number, medium, camera/lens metadata, artist credit, and keyboard navigation (`Esc`, `←`, `→`).
-- **Live-Filtering Archival Search & Index Folio**:
-  - Upgrade `SearchOverlay.tsx` from a static form into an instant, real-time archival search folio that filters across **Articles** (title, excerpt, tags, author, bilingual text), **Seasonal Issues**, **Contributors**, and **Campus Chronicle** events, complete with instant genre facets (`All`, `Poetry`, `Prose`, `Reviews`, `Contributors`, `Chronicle`) and keyboard shortcut support (`/` or `Cmd/Ctrl + K`).
+This plan executes a strict **UI-only unslop pass** across the Jadavpur University Arts and Literary Society (**JUALS**) digital periodical, restoring full alignment with the repository's `DESIGN.md` specification and the 9-pass editorial review rules (*Spacing → Color → Icons → Copy → Type → Layout → Details → Visuals → Motion*).
 
 ---
 
-## 2. Planned File Changes
-
-### A. Theme Tokens, Paper Tactility & CSS Variables
-- **`/src/index.css`**:
-  - Replace static color variables with dynamic CSS custom properties on `:root` and `html[data-theme="evening"]` mapped into `@theme` tokens (`--color-paper`, `--color-paper-elevated`, `--color-ink`, `--color-ink-muted`, `--color-accent`, `--color-rule`, `--color-rule-strong`).
-  - Add a subtle, non-intrusive SVG noise texture class (`.paper-grain`) and refine editorial hairline transitions so switching between Daylight Paper and Evening Ink feels instantaneous and natural.
-- **`/src/context/ThemeContext.tsx`** *(New)*:
-  - Lightweight React context providing `theme: 'daylight' | 'evening'`, `toggleTheme()`, and `localStorage` persistence.
-
-### B. Bespoke Editorial Plates & Decoupled Data Layer
-- **`/public/images/editorial/*`** *(New Generated Assets)*:
-  - Generate bespoke editorial plates evoking Jadavpur University and Kolkata's literary culture and wire their paths into `/src/data/issues.ts`, `/src/data/articles.ts`, and `/src/data/photography.ts`.
-- **`/src/data/siteConfig.ts`** & **`/src/types.ts`**:
-  - Add `colophonDateline`, `primaryNavLinks` (the 5 streamlined top-bar links) alongside `navLinks` (full index drawer directory), and theme toggle labels so zero UI copy is hardcoded.
-
-### C. Masthead, Colophon Strip & Full Index Drawer
-- **`/src/components/Header.tsx`**:
-  - Render the top colophon hairline bar (`JADAVPUR UNIVERSITY · KOLKATA`, active Issue badge link, and the `Daylight / Evening` atmosphere toggle).
-  - Render the streamlined 5-link desktop bar (`Issues`, `Poetry`, `Prose`, `Artwork`, `Chronicle`) with active underline indicator, Search button (`⌘K`), and `Index` drawer trigger.
-- **`/src/components/MenuOverlay.tsx`**:
-  - Upgrade into a full-width archival **Periodical Index Drawer** organized into three columns: *Primary Folios*, *Society & Apparatus* (`Contributors`, `Reviews`, `Chronicle`, `About & Masthead`), and *Current Issue Colophon*.
-
-### D. Museum Lightbox Viewer & Artwork / Article Plate Inspection
-- **`/src/components/PlateLightbox.tsx`** *(New)*:
-  - Full-viewport museum inspection modal displaying the plate, accession ID, title, artist/photographer, location, year, technical specs, curatorial note, zoom toggle (`1x Fit` / `1.75x Detail`), and Previous/Next plate stepping.
-- **`/src/pages/Artwork.tsx`**, **`/src/components/ImageEmbed.tsx`**, & **`/src/components/Gallery.tsx`**:
-  - Connect every photographic plate and article visual embed to `PlateLightbox` with a subtle `Inspect Plate` hover caption.
-
-### E. Live-Filtering Archival Search Folio
-- **`/src/components/SearchOverlay.tsx`**:
-  - Transform into an interactive live-filtering search index across `articles`, `authors`, `issues`, and `chronicleEvents`.
-  - Include category filter tabs (`All`, `Poetry`, `Prose`, `Reviews`, `Contributors`, `Chronicle`), instant result counts (`tabular-nums`), and quick-select curated archival queries when the input is empty.
+## 1. Masthead & Top Bar Contract (`Header.tsx`, `Footer.tsx`, `MenuOverlay.tsx`)
+- **Single-Row 3-Zone Header (`Header.tsx`)**:
+  - Remove the second top colophon strip above the main navigation bar so `<header>` is strictly a single-row, 3-zone bar (`h-16`) with a bottom hairline rule (`border-b border-ink/12`).
+  - **Zone 1 (Left)**: `JUALS` serif wordmark with the subtle vertical hairline institutional label on wide viewports.
+  - **Zone 2 (Center)**: Single-line primary periodical links (`Issues`, `Poetry`, `Prose`, `Artwork`, `Chronicle`) with a `1.5px` deep oxblood active underline.
+  - **Zone 3 (Right)**: Unboxed typographic `Search` trigger (`/`), subtle Daylight/Evening reading atmosphere toggle, and `Index` drawer trigger—removing the boxed button chrome and `<kbd>` badge clutter.
+- **Footer & Index Drawer Clean-Up (`Footer.tsx`, `MenuOverlay.tsx`)**:
+  - Remove the boxed container (`border border-ink/12 bg-paper-muted/50`) around the reading atmosphere switch inside `MenuOverlay.tsx`, replacing it with a clean hairline ledger row.
+  - Surface the current issue colophon and reading atmosphere toggle cleanly in `Footer.tsx` as part of the bottom institutional colophon.
 
 ---
 
-## 3. Verification & Quality Gates
-1. Update `/JOURNEY.md` with Stage 13 documenting Pillar 1 architectural enhancements.
-2. Run `compile_applet` and `lint_applet` to ensure zero TypeScript or build errors.
+## 2. Front Page & Archive De-Boxing (`Home.tsx`, `Issues.tsx`)
+- **Flatten Current Issue Spotlight (`Home.tsx`)**:
+  - Remove the shaded background wash (`bg-paper-muted/30`) from the Current Issue Spotlight section so it sits directly on crisp archival paper (`#F7F5F0`), separated purely by `1px` structural hairline rules.
+  - Streamline the section header and table of contents rows to reduce redundant all-caps micro-kickers.
+- **De-Box Campus Chronicle Preview (`Home.tsx`)**:
+  - Replace the 3 bordered event cards (`border border-ink/12 p-6`) at the bottom of `Home.tsx` with an open, 3-column architectural grid divided by vertical and horizontal hairlines (`divide-y md:divide-y-0 md:divide-x divide-ink/12 border-y border-ink/12`), eliminating card-in-section boxing.
+- **Unbox Past Issues Vault & Switcher (`Issues.tsx`)**:
+  - Remove the shaded top ribbon wash (`bg-paper-muted/40`) in `Issues.tsx` in favor of a clean hairline bar on open paper.
+  - Replace the bordered volume cards (`border p-6`) in the "Archival Volumes & Folios" vault with an unboxed, hairline-divided 3-column architectural ledger (`divide-y md:divide-y-0 md:divide-x divide-ink/12 border-y border-ink/12`).
+  - Upgrade the issue plate inspection modal in `Issues.tsx` to use `PlateLightbox` for consistent curatorial presentation.
+
+---
+
+## 3. Directory, Chronicle & Exhibition Unslop (`Contributors.tsx`, `ContributorDetail.tsx`, `Chronicle.tsx`, `Artwork.tsx`)
+- **Strip Bordered Filter Button Clutter (`Contributors.tsx`, `Chronicle.tsx`)**:
+  - Replace the boxed rectangular filter buttons (`px-3 py-1.5 border border-ink/15` / `bg-accent text-paper`) on `Contributors.tsx` and `Chronicle.tsx` with clean typographic underline tabs (`border-b-2 border-accent text-accent` vs `text-ink-muted hover:text-ink`), matching the quiet editorial discipline of a literary index.
+- **De-Box Dispatch Notes & Breadcrumb Bars (`Chronicle.tsx`, `ContributorDetail.tsx`)**:
+  - Remove the shaded box (`bg-paper-muted/50 py-3 px-4`) around `dispatchNotes` in `Chronicle.tsx`, rendering it as a clean italic editorial note separated by a top hairline.
+  - Remove the shaded background wash (`bg-paper-muted/40`) on the breadcrumb bar in `ContributorDetail.tsx`.
+- **Remove Hover Badge Chrome on Plates (`Artwork.tsx`)**:
+  - Remove the floating boxed `Inspect Plate` badge + `ZoomIn` icon overlay (`bg-paper/95 border border-ink/15`) from artwork plates so the visual art remains unobstructed; rely on subtle image opacity transition and caption typography.
+
+---
+
+## 4. Long-Form Reading Canvas & Apparatus Unslop (`Post.tsx`, `PoetryBlock.tsx`, `TranslationBlock.tsx`, `AcademicCitationBox.tsx`)
+- **Open-Paper Verse & Bilingual Folios (`PoetryBlock.tsx`, `TranslationBlock.tsx`)**:
+  - Remove the heavy shaded container fills (`bg-paper-muted/35 px-5 sm:px-10` in `PoetryBlock.tsx` and `bg-paper-muted/40 px-5 sm:px-8` in `TranslationBlock.tsx`) so poems and bilingual translations breathe directly on the `#F7F5F0` archival page between crisp top-and-bottom hairlines (`border-y border-ink/15 py-8`).
+  - Replace the boxed segmented button group (`border border-ink/15 bg-paper p-0.5`) in `TranslationBlock.tsx` with clean typographic mode links separated by middots (`Side-by-Side · Stacked · Original · English`) and an underlined active state.
+- **Unbox Scholarly Offprint & Citation Apparatus (`AcademicCitationBox.tsx`, `Post.tsx`)**:
+  - Remove the shaded box (`bg-paper-muted/45 px-5 sm:px-7`) and boxed button cluster (`Copy` / `Printer` icons + bordered buttons) in `AcademicCitationBox.tsx`.
+  - Render the bibliographic record as a quiet, unboxed colophon section at the foot of the essay (`border-y border-ink/15 py-6`), with typographic format switches (`MLA 9th · Chicago 17th · BibTeX`) and clean text actions (`Copy Citation` · `Print Offprint`) without decorative icon clutter.
+  - Simplify the byline `Offprint` trigger in `Post.tsx` to a clean typographic link (`Print Offprint`) without a boxed button border or printer icon.
+  - Reduce repetitive all-caps micro-kickers across the marginalia rail and apparatus notes so the prose and verse remain the undisputed visual focal point.
+
+---
+
+## 5. Verification & Documentation
+- Update `/JOURNEY.md` with Stage 14 documenting the UI-only 9-pass unslop refinements.
+- Run `compile_applet` and `lint_applet` to verify zero TypeScript or build errors.

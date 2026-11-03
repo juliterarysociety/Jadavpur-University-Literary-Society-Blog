@@ -209,3 +209,21 @@ Completed the museum-grade surface architecture, dual reading atmosphere, bespok
    - Built `PlateLightbox.tsx` with `1.0× Fit` / `1.75× Detail` zoom inspection, keyboard plate stepping (`←`, `→`, `Z`, `Esc`), and a toggleable **Archival Record** sidebar displaying accession numbers (`JUALS-PLT-2025-01`), medium, dimensions, camera/process specs, provenance, and curatorial notes.
 5. **Live-Filtering Archival Search Folio (`/src/components/SearchOverlay.tsx`)**:
    - Upgraded `SearchOverlay.tsx` to perform real-time full-text filtering across articles (including bilingual poetry stanzas and marginalia annotations), contributors, seasonal issues, and campus chronicle events, complete with instant genre facets and curated quick-select archival terms.
+
+---
+
+## Stage 14: UI-Only 9-Pass Editorial Unslop (Single-Row Top Bar & Open-Paper Hairline Ledger Discipline)
+
+Executed a strict UI-only 9-pass unslop (*Spacing → Color → Icons → Copy → Type → Layout → Details → Visuals → Motion*) across the JUALS templates to enforce `DESIGN.md` and eliminate nested containers, boxed cards, bordered filter chips, and icon clutter:
+
+1. **Strict Single-Row 3-Zone Top Bar (`Header.tsx`, `Footer.tsx`, `MenuOverlay.tsx`)**:
+   - Restored `<header>` to a single-row 3-zone bar (`h-16`) with a `1px` bottom hairline rule (`border-b border-ink/12`), removing the top colophon ribbon and boxed button/`<kbd>` chrome.
+   - Left zone displays the `JUALS` serif masthead and society subtitle; center zone houses the 5 primary section links with an oxblood active underline; right zone houses quiet typographic `Search`, `Evening`/`Daylight`, and `Index` triggers.
+   - Relocated the seasonal issue colophon and reading atmosphere switcher to the bottom institutional colophon (`Footer.tsx`) and unboxed hairline rows in `MenuOverlay.tsx`.
+2. **De-Boxed Front Page & Archive Ledgers (`Home.tsx`, `Issues.tsx`, `Contributors.tsx`, `ContributorDetail.tsx`, `Chronicle.tsx`, `Artwork.tsx`)**:
+   - Flattened the Current Issue Spotlight in `Home.tsx` onto open archival paper (`bg-paper`) and replaced the 3 bordered Campus Chronicle cards on `Home.tsx` and the 3 bordered volume cards on `Issues.tsx` with unboxed, hairline-divided 3-column architectural ledgers (`divide-y md:divide-y-0 md:divide-x divide-ink/12 border-y border-ink/12`).
+   - Replaced bordered rectangular filter buttons in `Contributors.tsx`, `Chronicle.tsx`, and `Issues.tsx` with clean typographic underline tabs (`border-b-2`).
+   - Removed the floating `Inspect Plate` badge + `ZoomIn` icon overlay on `Artwork.tsx` plates so visual works rest cleanly above their museum captions.
+3. **Open-Paper Literary Apparatus (`Post.tsx`, `PoetryBlock.tsx`, `TranslationBlock.tsx`, `AcademicCitationBox.tsx`)**:
+   - Removed shaded background containers (`bg-paper-muted/*`) and horizontal box padding from `PoetryBlock.tsx`, `TranslationBlock.tsx`, `AcademicCitationBox.tsx`, and `Post.tsx` callout blocks so verse, bilingual translations, and bibliographic records sit directly on open archival paper between crisp top-and-bottom hairlines (`border-y border-ink/15`).
+   - Replaced boxed segmented button groups and decorative `Copy`/`Printer` icons with clean typographic underline switches and text actions (`Copy Citation`, `Print Offprint`).

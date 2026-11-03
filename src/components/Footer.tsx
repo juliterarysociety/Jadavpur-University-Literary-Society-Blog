@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { siteConfig } from "../data/siteConfig";
+import { currentIssue } from "../data/issues";
+import { useTheme } from "../context/ThemeContext";
 
 export function Footer() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <footer className="border-t border-ink/12 bg-paper py-14 lg:py-16 mt-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -13,11 +17,19 @@ export function Footer() {
             <p className="text-sm text-ink-light max-w-sm leading-relaxed">
               {siteConfig.footer.description}
             </p>
+            <div className="pt-2 text-xs text-ink-muted tabular-nums">
+              <Link
+                to={`/issues/${currentIssue.slug}`}
+                className="hover:text-accent transition-colors duration-150"
+              >
+                Current Edition: {currentIssue.volume}, {currentIssue.issueNumber} ({currentIssue.season})
+              </Link>
+            </div>
           </div>
-          
+
           <div className="md:col-span-4 flex flex-col gap-3">
             <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-muted">
-              Index & Departments
+              Index &amp; Departments
             </h4>
             <nav className="grid grid-cols-2 gap-x-6 gap-y-2">
               {siteConfig.navigation.map((link, idx) => (
@@ -31,7 +43,7 @@ export function Footer() {
               ))}
             </nav>
           </div>
-          
+
           <div className="md:col-span-3 flex flex-col gap-3">
             <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-muted">
               Editorial Desk
@@ -48,10 +60,22 @@ export function Footer() {
                   {social.platform} &middot; {social.handle}
                 </a>
               ))}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="mt-2 text-left text-xs text-ink-muted hover:text-accent transition-colors duration-150 cursor-pointer"
+              >
+                Reading Atmosphere:{" "}
+                <span className="text-ink font-medium">
+                  {theme === "daylight"
+                    ? siteConfig.colophon.daylightLabel
+                    : siteConfig.colophon.eveningLabel}
+                </span>
+              </button>
             </nav>
           </div>
         </div>
-        
+
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-ink/10 pt-8 sm:flex-row sm:items-center">
           <p className="text-xs text-ink-muted tabular-nums">
             {siteConfig.footer.copyrightNotice}

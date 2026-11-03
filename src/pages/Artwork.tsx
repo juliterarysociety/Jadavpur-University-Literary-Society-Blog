@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ZoomIn } from "lucide-react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { PlateLightbox } from "../components/PlateLightbox";
@@ -53,7 +52,7 @@ export function Artwork() {
                       setSelectedIssueFilter(tab.value);
                       setSelectedIndex(null);
                     }}
-                    className={`pb-1.5 text-xs uppercase tracking-[0.15em] transition-colors duration-150 tabular-nums border-b-2 ${
+                    className={`pb-1.5 text-xs uppercase tracking-[0.15em] transition-colors duration-150 tabular-nums border-b-2 cursor-pointer ${
                       active
                         ? "border-accent text-accent font-semibold"
                         : "border-transparent text-ink-muted hover:text-ink font-medium"
@@ -86,10 +85,6 @@ export function Artwork() {
                     loading="lazy"
                     className="w-full h-auto object-cover transition-opacity duration-200 group-hover:opacity-90"
                   />
-                  <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 bg-paper/95 border border-ink/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-                    <ZoomIn className="h-3 w-3 text-accent" />
-                    <span>Inspect Plate</span>
-                  </div>
                 </button>
                 <figcaption className="mt-3.5 border-b border-ink/10 pb-4">
                   <div className="flex items-baseline justify-between gap-3">

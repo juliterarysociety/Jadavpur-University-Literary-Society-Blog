@@ -28,10 +28,10 @@ export function TranslationBlock({
   );
 
   return (
-    <section className="not-prose my-12 border-y border-ink/15 bg-paper-muted/40 py-8 px-5 sm:px-8 print:break-inside-avoid">
+    <section className="not-prose my-12 border-y border-ink/15 py-8 print:break-inside-avoid">
       {/* Top Attribution & Mode Bar */}
       <div className="border-b border-ink/12 pb-5">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
               Bilingual Folio &middot; {originalLanguage} &amp; English
@@ -48,11 +48,11 @@ export function TranslationBlock({
           </div>
 
           {/* Interactive View Switcher (Hidden in Print) */}
-          <div className="flex flex-wrap items-center gap-2 print:hidden">
+          <div className="flex flex-wrap items-center gap-4 print:hidden">
             <div
               role="group"
               aria-label="Translation display mode"
-              className="inline-flex border border-ink/15 bg-paper p-0.5"
+              className="flex flex-wrap items-center gap-3.5"
             >
               {(
                 [
@@ -68,10 +68,10 @@ export function TranslationBlock({
                     key={tab.id}
                     type="button"
                     onClick={() => setViewMode(tab.id)}
-                    className={`px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] whitespace-nowrap transition-colors duration-150 cursor-pointer ${
+                    className={`pb-1 text-[11px] uppercase tracking-[0.14em] whitespace-nowrap border-b-2 transition-colors duration-150 cursor-pointer ${
                       active
-                        ? "bg-ink text-paper"
-                        : "text-ink-muted hover:text-ink"
+                        ? "border-accent text-accent font-semibold"
+                        : "border-transparent text-ink-muted hover:text-ink"
                     }`}
                   >
                     {tab.label}
@@ -81,17 +81,22 @@ export function TranslationBlock({
             </div>
 
             {hasTransliteration && viewMode !== "english" && (
-              <button
-                type="button"
-                onClick={() => setShowTransliteration((prev) => !prev)}
-                className={`border px-2.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] whitespace-nowrap transition-colors duration-150 cursor-pointer ${
-                  showTransliteration
-                    ? "border-accent bg-accent-soft text-accent"
-                    : "border-ink/15 bg-paper text-ink-muted hover:text-ink"
-                }`}
-              >
-                {showTransliteration ? "Hide Phonetics" : "Roman Transliteration"}
-              </button>
+              <>
+                <span className="text-ink/20" aria-hidden="true">
+                  |
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowTransliteration((prev) => !prev)}
+                  className={`pb-1 text-[11px] uppercase tracking-[0.14em] whitespace-nowrap border-b-2 transition-colors duration-150 cursor-pointer ${
+                    showTransliteration
+                      ? "border-accent text-accent font-semibold"
+                      : "border-transparent text-ink-muted hover:text-ink"
+                  }`}
+                >
+                  {showTransliteration ? "Hide Phonetics" : "Phonetics"}
+                </button>
+              </>
             )}
           </div>
         </div>

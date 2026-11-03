@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Link, useLocation } from "react-router-dom";
-import { X, ArrowUpRight, Sun, Moon } from "lucide-react";
+import { X } from "lucide-react";
 import { siteConfig } from "../data/siteConfig";
 import { currentIssue } from "../data/issues";
 import { useTheme } from "../context/ThemeContext";
@@ -65,7 +65,7 @@ export function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
               <button
                 type="button"
                 onClick={onClose}
-                className="h-9 w-9 inline-flex items-center justify-center text-ink-light hover:text-ink transition-colors duration-150"
+                className="h-9 w-9 inline-flex items-center justify-center text-ink-light hover:text-ink transition-colors duration-150 cursor-pointer"
                 aria-label="Close Navigation"
               >
                 <X className="h-4 w-4" />
@@ -74,41 +74,10 @@ export function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
 
             {/* Navigation Body */}
             <div className="flex-1 overflow-y-auto px-6 py-7 space-y-8">
-              {/* Reading Atmosphere Switcher inside Drawer */}
-              <div className="flex items-center justify-between border border-ink/12 bg-paper-muted/50 px-4 py-3">
-                <div>
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
-                    Reading Atmosphere
-                  </div>
-                  <div className="font-serif text-sm text-ink mt-0.5">
-                    {theme === "daylight"
-                      ? siteConfig.colophon.daylightLabel
-                      : siteConfig.colophon.eveningLabel}
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="inline-flex items-center gap-1.5 border border-ink/15 bg-paper px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink hover:border-accent hover:text-accent transition-colors duration-150"
-                >
-                  {theme === "daylight" ? (
-                    <>
-                      <Moon className="h-3 w-3 text-accent" />
-                      <span>Switch to {siteConfig.colophon.eveningLabel}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Sun className="h-3 w-3 text-accent" />
-                      <span>Switch to {siteConfig.colophon.daylightLabel}</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Current Issue Spotlight Card */}
-              <div className="border-y border-ink/12 py-4">
+              {/* Current Issue Spotlight Ledger Row */}
+              <div className="border-b border-ink/12 pb-5">
                 <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent mb-1 tabular-nums">
-                  Current Folio &middot; {currentIssue.volume}, {currentIssue.issueNumber}
+                  {currentIssue.volume}, {currentIssue.issueNumber} &middot; {currentIssue.season}
                 </div>
                 <Link
                   to={`/issues/${currentIssue.slug}`}
@@ -198,16 +167,42 @@ export function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
                         }`}
                       >
                         <span>{page.name}</span>
-                        <ArrowUpRight className="h-3.5 w-3.5 text-ink-muted group-hover:text-accent transition-colors duration-150" />
+                        <span className="text-ink-muted group-hover:text-accent transition-colors duration-150">
+                          &rarr;
+                        </span>
                       </Link>
                     );
                   })}
                 </div>
               </div>
+
+              {/* Unboxed Reading Atmosphere Ledger Row */}
+              <div className="flex items-baseline justify-between border-t border-ink/12 pt-5">
+                <div>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
+                    Reading Atmosphere
+                  </div>
+                  <div className="font-serif text-sm text-ink mt-0.5">
+                    {theme === "daylight"
+                      ? siteConfig.colophon.daylightLabel
+                      : siteConfig.colophon.eveningLabel}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="text-xs font-medium uppercase tracking-[0.15em] text-accent hover:text-ink transition-colors duration-150 cursor-pointer"
+                >
+                  Switch to{" "}
+                  {theme === "daylight"
+                    ? siteConfig.colophon.eveningLabel
+                    : siteConfig.colophon.daylightLabel}
+                </button>
+              </div>
             </div>
 
             {/* Bottom Colophon */}
-            <div className="px-6 py-4 border-t border-ink/12 bg-paper-muted/50 space-y-1">
+            <div className="px-6 py-4 border-t border-ink/12 space-y-1">
               <div className="text-[10px] uppercase tracking-[0.16em] text-ink-muted">
                 Editorial Desk &middot; Jadavpur University, Kolkata
               </div>
